@@ -1,0 +1,11 @@
+<odoo>
+
+    <record model="ir.sequence" id="seq_mrp_product_template">
+        <field name="name">Mrp Product Template</field>
+        <field name="code">mrp.product.template</field>
+        <field name="padding">5</field>
+        <field name="prefix">MPT</field>
+        <field name="company_id" eval="False"/>
+    </record>
+
+</odoo>

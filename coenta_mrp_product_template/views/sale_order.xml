@@ -11,11 +11,13 @@
             <xpath expr="//header" position="inside">
                 <button name="create_mrp_product_template_ids" type="object"
                         class="oe_stat_button" icon="fa-cogs" string="Create MRP Product Template"
+                        attrs="{'invisible':[('mrp_product_template_ids','!=',[])]}"
                         />
             </xpath>
             <xpath expr="//div[@name='button_box']" position="inside">
                 <button name="action_open_product_template" type="object"
                         class="oe_stat_button" icon="fa-cogs" string="MRP Product Template"
+
                         />
             </xpath>
             <xpath expr="//notebook" position="inside">

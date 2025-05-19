@@ -55,78 +55,133 @@
                 </div>
                 <div class="row">
                     <div class="col-12">
+                        <t t-set="boyutlar" t-value="o.workorder_ids.mapped('product_id').sorted(key='sequence')"/>
+
                         <table class="table table-bordered"
                                style="vertical-align:middle; font-size:10pt; text-align:left">
                             <thead>
-                                <tr style="background-color: #f2f2f2;font-size:bold;">
-                                    <th>Product</th>
-                                    <th>Quantity</th>
-                                    <th>UOM</th>
-                                    <th>Duration</th>
+                                <tr>
+                                    <td>
+                                        <span t-field="o.mrp_template_id.product_tmpl_id.name"/>
+                                    </td>
+                                    <t t-foreach="boyutlar" t-as="b">
+                                        <td>
+                                            <span t-field="b.product_size_attribute_id.name"/>-
+                                            <span t-field="b.product_color_attribute_id.name"/>
+                                        </td>
+                                    </t>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        Adetler
+                                    </td>
+                                    <t t-foreach="o.workorder_ids" t-as="w">
+                                        <td>
+                                            <span t-field="w.production_id.product_qty"/>
+                                        </td>
+                                    </t>
                                 </tr>
                             </thead>
                             <tbody>
-                                <t t-foreach="o.workorder_ids" t-as="workorder">
-                                    <t t-set="production" t-value="workorder.production_id"/>
-                                    <tr style="background-color: #000000;color:white;font-size:bold;">
-                                        <td>
-                                            <span t-field="production.product_id.display_name"/>
-                                        </td>
-                                        <td>
-                                            <span t-field="production.qty_producing"/>
-                                        </td>
-                                        <td>
-                                            <span t-field="production.product_uom_id.name"/>
-                                        </td>
-                                        <td>
-                                            <span t-field="workorder.duration" />
-                                        </td>
-                                    </tr>
+                                <t t-foreach="o.mrp_template_id.mrp_product_template_move_ids" t-as="raw">
                                     <tr>
-                                        <td colspan="4">
-
-
-                                        <table class="table table-bordered"
-                                               style="vertical-align:middle; font-size:10pt; text-align:left">
-                                            <thead>
-                                                <tr>
-                                                    <th>Product</th>
-                                                    <th>Quantity</th>
-                                                    <th>UOM</th>
-                                                    <th>Lot</th>
-                                                </tr>
-                                            </thead>
-                                            <tbody>
-                                                <t t-foreach="production.move_raw_ids" t-as="raw">
-                                                    <tr>
-                                                        <td>
-                                                            <span t-field="raw.product_id.name"/>
-                                                        </td>
-                                                        <td>
-                                                            <span t-field="raw.product_uom_qty"/>
-                                                        </td>
-                                                        <td>
-                                                            <span t-field="raw.quantity_done"/>
-                                                        </td>
-                                                        <td>
-                                                            <span t-field="raw.lot_ids"/>
-                                                        </td>
-                                                    </tr>
+                                        <td>
+                                            <span t-field="raw.product_id.display_name"/>
+                                        </td>
+                                        <t t-foreach="o.workorder_ids" t-as="workorder">
+                                            <t t-foreach="workorder.production_id.move_raw_ids" t-as="praw">
+                                                <t t-if="raw.product_id == praw.product_id">
+                                                    <td>
+                                                        <span t-field="praw.product_uom_qty"/>
+                                                    </td>
                                                 </t>
-                                            </tbody>
-                                        </table>
-                                        </td>
-                                    </tr>
-                                    <tr>
-
+                                            </t>
+                                            <t t-if="raw.product_id not in workorder.production_id.move_raw_ids.mapped('product_id')">
+                                                    <td>
+                                                        NA
+                                                    </td>
+                                            </t>
+                                        </t>
                                     </tr>
                                 </t>
-
                             </tbody>
-
                         </table>
                     </div>
                 </div>
+                <!--                <div class="row">-->
+                <!--                    <div class="col-12">-->
+                <!--                        <table class="table table-bordered"-->
+                <!--                               style="vertical-align:middle; font-size:10pt; text-align:left">-->
+                <!--                            <thead>-->
+                <!--                                <tr style="background-color: #f2f2f2;font-size:bold;">-->
+                <!--                                    <th>Product</th>-->
+                <!--                                    <th>Quantity</th>-->
+                <!--                                    <th>UOM</th>-->
+                <!--                                    <th>Duration</th>-->
+                <!--                                </tr>-->
+                <!--                            </thead>-->
+                <!--                            <tbody>-->
+                <!--                                <t t-foreach="o.workorder_ids" t-as="workorder">-->
+                <!--                                    <t t-set="production" t-value="workorder.production_id"/>-->
+                <!--                                    <tr style="background-color: #000000;color:white;font-size:bold;">-->
+                <!--                                        <td>-->
+                <!--                                            <span t-field="production.product_id.display_name"/>-->
+                <!--                                        </td>-->
+                <!--                                        <td>-->
+                <!--                                            <span t-field="production.qty_producing"/>-->
+                <!--                                        </td>-->
+                <!--                                        <td>-->
+                <!--                                            <span t-field="production.product_uom_id.name"/>-->
+                <!--                                        </td>-->
+                <!--                                        <td>-->
+                <!--                                            <span t-field="workorder.duration" />-->
+                <!--                                        </td>-->
+                <!--                                    </tr>-->
+                <!--                                    <tr>-->
+                <!--                                        <td colspan="4">-->
+
+
+                <!--                                        <table class="table table-bordered"-->
+                <!--                                               style="vertical-align:middle; font-size:10pt; text-align:left">-->
+                <!--                                            <thead>-->
+                <!--                                                <tr>-->
+                <!--                                                    <th>Product</th>-->
+                <!--                                                    <th>Quantity</th>-->
+                <!--                                                    <th>UOM</th>-->
+                <!--                                                    <th>Lot</th>-->
+                <!--                                                </tr>-->
+                <!--                                            </thead>-->
+                <!--                                            <tbody>-->
+                <!--                                                <t t-foreach="production.move_raw_ids" t-as="raw">-->
+                <!--                                                    <tr>-->
+                <!--                                                        <td>-->
+                <!--                                                            <span t-field="raw.product_id.name"/>-->
+                <!--                                                        </td>-->
+                <!--                                                        <td>-->
+                <!--                                                            <span t-field="raw.product_uom_qty"/>-->
+                <!--                                                        </td>-->
+                <!--                                                        <td>-->
+                <!--                                                            <span t-field="raw.quantity_done"/>-->
+                <!--                                                        </td>-->
+                <!--                                                        <td>-->
+                <!--                                                            <span t-field="raw.lot_ids"/>-->
+                <!--                                                        </td>-->
+                <!--                                                    </tr>-->
+                <!--                                                </t>-->
+                <!--                                            </tbody>-->
+                <!--                                        </table>-->
+                <!--                                        </td>-->
+                <!--                                    </tr>-->
+                <!--                                    <tr>-->
+
+                <!--                                    </tr>-->
+                <!--                                </t>-->
+
+                <!--                            </tbody>-->
+
+                <!--                        </table>-->
+                <!--                    </div>-->
+                <!--                </div>-->
 
             </div>
         </t>
@@ -141,136 +196,136 @@
     </template>
 
     <template id="report_mrp_product_teplate_document">
-        <t t-foreach="docs" t-as="o">
+        <t t-foreach="docs" t-as="doc">
             <t t-call="web.external_layout">
-                <t t-foreach="o.workorder_template_ids" t-as="o">
+                <t t-foreach="doc.workorder_template_ids" t-as="o">
                     <t t-set="o" t-value="o.with_context()"/>
-            <div class="page">
-                <style>
-                    .table-bordered > thead > tr > th,
-                    .table-bordered > tbody > tr > th,
-                    .table-bordered > tfoot > tr > th,
-                    .table-bordered > thead > tr > td,
-                    .table-bordered > tbody > tr > td,
-                    .table-bordered > tfoot > tr > td {
-                    border: 1px solid #000000;
-                    }
-                </style>
-                <div class="row">
-                    <div class="col-12">
-                        <table class="table table-bordered"
-                               style="vertical-align:middle; font-size:10pt; text-align:left">
-                            <thead>
-                                <tr>
-                                    <th class="col-xs-3">
-                                        Manufacture Order
-                                    </th>
-                                    <th class="col-xs-3">
-                                        Production note
-                                    </th>
-                                    <th class="col-xs-3">
-                                        Product
-                                    </th>
-                                    <th class="col-xs-3">
-                                        Work Center
-                                    </th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <td>
-                                        <span t-field="o.mrp_template_id.name"/>
-                                    </td>
-                                    <td>
-                                        <span t-field="o.name"/>
-                                    </td>
-                                    <td>
-                                        <span t-field="o.mrp_template_id.product_tmpl_id.name"/>
-                                    </td>
-                                    <td>
-                                        <span t-field="o.operation_id.workcenter_id"/>
-                                    </td>
-                                </tr>
-                            </tbody>
-                        </table>
+                    <div class="page">
+                        <style>
+                            .table-bordered > thead > tr > th,
+                            .table-bordered > tbody > tr > th,
+                            .table-bordered > tfoot > tr > th,
+                            .table-bordered > thead > tr > td,
+                            .table-bordered > tbody > tr > td,
+                            .table-bordered > tfoot > tr > td {
+                            border: 1px solid #000000;
+                            }
+                        </style>
+                        <div class="row">
+                            <div class="col-12">
+                                <table class="table table-bordered"
+                                       style="vertical-align:middle; font-size:10pt; text-align:left">
+                                    <thead>
+                                        <tr>
+                                            <th class="col-xs-3">
+                                                Manufacture Order
+                                            </th>
+                                            <th class="col-xs-3">
+                                                Production note
+                                            </th>
+                                            <th class="col-xs-3">
+                                                Product
+                                            </th>
+                                            <th class="col-xs-3">
+                                                Work Center
+                                            </th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td>
+                                                <span t-field="o.mrp_template_id.name"/>
+                                            </td>
+                                            <td>
+                                                <span t-field="o.name"/>
+                                            </td>
+                                            <td>
+                                                <span t-field="o.mrp_template_id.product_tmpl_id.name"/>
+                                            </td>
+                                            <td>
+                                                <span t-field="o.operation_id.workcenter_id"/>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-12">
+                                <table class="table table-bordered"
+                                       style="vertical-align:middle; font-size:10pt; text-align:left">
+                                    <thead>
+                                        <tr style="background-color: #f2f2f2;font-size:bold;">
+                                            <th>Product</th>
+                                            <th>Quantity</th>
+                                            <th>UOM</th>
+                                            <th>Duration</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <t t-foreach="o.workorder_ids" t-as="workorder">
+                                            <t t-set="production" t-value="workorder.production_id"/>
+                                            <tr style="background-color: #000000;color:white;font-size:bold;">
+                                                <td>
+                                                    <span t-field="production.product_id.display_name"/>
+                                                </td>
+                                                <td>
+                                                    <span t-field="production.qty_producing"/>
+                                                </td>
+                                                <td>
+                                                    <span t-field="production.product_uom_id.name"/>
+                                                </td>
+                                                <td>
+                                                    <span t-field="workorder.duration"/>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td colspan="4">
+
+
+                                                    <table class="table table-bordered"
+                                                           style="vertical-align:middle; font-size:10pt; text-align:left">
+                                                        <thead>
+                                                            <tr>
+                                                                <th>Product</th>
+                                                                <th>Quantity</th>
+                                                                <th>UOM</th>
+                                                                <th>Lot</th>
+                                                            </tr>
+                                                        </thead>
+                                                        <tbody>
+                                                            <t t-foreach="production.move_raw_ids" t-as="raw">
+                                                                <tr>
+                                                                    <td>
+                                                                        <span t-field="raw.product_id.name"/>
+                                                                    </td>
+                                                                    <td>
+                                                                        <span t-field="raw.product_uom_qty"/>
+                                                                    </td>
+                                                                    <td>
+                                                                        <span t-field="raw.quantity_done"/>
+                                                                    </td>
+                                                                    <td>
+                                                                        <span t-field="raw.lot_ids"/>
+                                                                    </td>
+                                                                </tr>
+                                                            </t>
+                                                        </tbody>
+                                                    </table>
+                                                </td>
+                                            </tr>
+                                            <tr>
+
+                                            </tr>
+                                        </t>
+
+                                    </tbody>
+
+                                </table>
+                            </div>
+                        </div>
+
                     </div>
-                </div>
-                <div class="row">
-                    <div class="col-12">
-                        <table class="table table-bordered"
-                               style="vertical-align:middle; font-size:10pt; text-align:left">
-                            <thead>
-                                <tr style="background-color: #f2f2f2;font-size:bold;">
-                                    <th>Product</th>
-                                    <th>Quantity</th>
-                                    <th>UOM</th>
-                                    <th>Duration</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <t t-foreach="o.workorder_ids" t-as="workorder">
-                                    <t t-set="production" t-value="workorder.production_id"/>
-                                    <tr style="background-color: #000000;color:white;font-size:bold;">
-                                        <td>
-                                            <span t-field="production.product_id.display_name"/>
-                                        </td>
-                                        <td>
-                                            <span t-field="production.qty_producing"/>
-                                        </td>
-                                        <td>
-                                            <span t-field="production.product_uom_id.name"/>
-                                        </td>
-                                        <td>
-                                            <span t-field="workorder.duration" />
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td colspan="4">
-
-
-                                        <table class="table table-bordered"
-                                               style="vertical-align:middle; font-size:10pt; text-align:left">
-                                            <thead>
-                                                <tr>
-                                                    <th>Product</th>
-                                                    <th>Quantity</th>
-                                                    <th>UOM</th>
-                                                    <th>Lot</th>
-                                                </tr>
-                                            </thead>
-                                            <tbody>
-                                                <t t-foreach="production.move_raw_ids" t-as="raw">
-                                                    <tr>
-                                                        <td>
-                                                            <span t-field="raw.product_id.name"/>
-                                                        </td>
-                                                        <td>
-                                                            <span t-field="raw.product_uom_qty"/>
-                                                        </td>
-                                                        <td>
-                                                            <span t-field="raw.quantity_done"/>
-                                                        </td>
-                                                        <td>
-                                                            <span t-field="raw.lot_ids"/>
-                                                        </td>
-                                                    </tr>
-                                                </t>
-                                            </tbody>
-                                        </table>
-                                        </td>
-                                    </tr>
-                                    <tr>
-
-                                    </tr>
-                                </t>
-
-                            </tbody>
-
-                        </table>
-                    </div>
-                </div>
-
-            </div>
                 </t>
             </t>
         </t>

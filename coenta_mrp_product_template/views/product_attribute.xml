@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Copyright 2025 Coenta Team
+     License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl). -->
+
+<odoo>
+
+    <record model="ir.ui.view" id="product_attribute_form_view">
+        <field name="model">product.attribute</field>
+        <field name="inherit_id" ref="product.product_attribute_view_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='display_type']" position="before">
+                <field name="is_size"/>
+                <field name="is_color"/>
+            </xpath>
+        </field>
+    </record>
+
+
+
+</odoo>

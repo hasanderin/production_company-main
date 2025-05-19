@@ -34,3 +34,4 @@ class SaleOrder(models.Model):
             action['domain'] = [('id', 'in', self.mrp_product_template_ids.ids)]
         return action
 
+

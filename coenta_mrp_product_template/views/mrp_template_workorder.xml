@@ -28,7 +28,7 @@
                         class="btn-success" icon="fa-check"
                         attrs="{'invisible': [('state', 'in', ['done','cancel','pending','waiting','ready'])]}"/>
                  <button name="print_report" type="object" string="Print" icon="fa-print"
-                                            attrs="{'invisible': [('state', 'not in', ['done',])]}"/>
+                                           />
             </tree>
         </field>
     </record>

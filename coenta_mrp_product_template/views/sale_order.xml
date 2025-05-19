@@ -21,7 +21,20 @@
                         />
             </xpath>
             <xpath expr="//notebook" position="inside">
-                <page string="MRP Product Template" name="mrp_product_template_ids">
+                <page string="Production Notes">
+                    <field name="mrp_product_template_ids" invisible="1"/>
+                    <field name="sale_production_note_ids" context="{'default_sale_order_id': id}">
+                        <tree editable="bottom">
+                            <field name="domain_product_template_ids" invisible="1"/>
+                            <field name="product_template_id" domain="[('id','in',domain_product_template_ids)]"/>
+                            <field name="workcenter_id" />
+                            <field name="name" string="Production Notes"/>
+                            <field name="image" widget="image" class="oe_avatar"/>
+
+                        </tree>
+                    </field>
+                </page>
+                <!--<page string="MRP Product Template" name="mrp_product_template_ids">
                     <field name="mrp_product_template_ids" context="{'default_sale_order_id': id}">
                         <tree create="false" delete="false">
                             <field name="product_tmpl_id"/>
@@ -30,7 +43,7 @@
 
                         </tree>
                     </field>
-                </page>
+                </page> -->
             </xpath>
         </field>
     </record>

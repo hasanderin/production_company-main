@@ -10,6 +10,16 @@ class SaleOrder(models.Model):
 
     mrp_product_template_ids = fields.One2many('mrp.product.template','sale_id','Production Templates')
 
+    sale_production_note_ids = fields.One2many('sale.production.note', 'sale_id', string="Production Notes")
+
+    domain_product_template_ids = fields.Many2many("product.template",compute='_compute_domain_product_template_ids', string="Domain Product Template")
+
+    @api.depends('order_line.product_id.product_tmpl_id')
+    def _compute_domain_product_template_ids(self):
+        for record in self:
+            product_template_ids = record.order_line.mapped('product_id').mapped('product_tmpl_id')
+            record.domain_product_template_ids = [(6, 0, product_template_ids.ids)]
+
 
     def create_mrp_product_template_ids(self):
         for record in self:
@@ -35,3 +45,23 @@ class SaleOrder(models.Model):
         return action
 
 
+    def create_sale_production_notes(self):
+        wc = self.env['mrp.workcenter'].search([])
+        for record in self:
+            templates = record.order_line.mapped('product_id').mapped('product_tmpl_id')
+            for template in templates:
+                for workcenter in wc:
+                    self.env['sale.production.note'].create({
+                        'sale_id': record.id,
+                        'product_template_id': template.id,
+                        'workcenter_id': workcenter.id,
+                    })
+
+
+
+
+    def action_confirm(self):
+        res = super(SaleOrder, self).action_confirm()
+        for record in self:
+            record.create_sale_production_notes()
+        return res

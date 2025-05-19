@@ -9,6 +9,7 @@
     'depends': ['mrp','product','sale'
     ],
     'data': [
+        'security/sale_production_note.xml',
         'views/product_attribute.xml',
         'security/mrp_product_template_move.xml',
         'views/mrp_workorder.xml',

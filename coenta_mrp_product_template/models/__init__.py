@@ -8,3 +8,4 @@ from . import stock_move
 from . import mrp_product_template_move
 from . import product_product
 from . import product_attribute
+from . import sale_production_note

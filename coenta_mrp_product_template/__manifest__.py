@@ -9,6 +9,7 @@
     'depends': ['mrp','product','sale'
     ],
     'data': [
+        'security/mrp_product_template_move.xml',
         'views/mrp_workorder.xml',
         'security/mrp_template_workorder.xml',
         'views/mrp_template_workorder.xml',
@@ -17,6 +18,9 @@
         'views/mrp_production.xml',
         'security/mrp_product_template.xml',
         'views/mrp_product_template.xml',
+        'report/report.xml',
+        'report/report_document.xml',
+
     ],
     'demo': [
     ],

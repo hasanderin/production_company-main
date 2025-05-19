@@ -13,11 +13,17 @@
                         class="oe_stat_button" icon="fa-cogs" string="Create MRP Product Template"
                         />
             </xpath>
+            <xpath expr="//div[@name='button_box']" position="inside">
+                <button name="action_open_product_template" type="object"
+                        class="oe_stat_button" icon="fa-cogs" string="MRP Product Template"
+                        />
+            </xpath>
             <xpath expr="//notebook" position="inside">
                 <page string="MRP Product Template" name="mrp_product_template_ids">
                     <field name="mrp_product_template_ids" context="{'default_sale_order_id': id}">
-                        <tree>
+                        <tree create="false" delete="false">
                             <field name="product_tmpl_id"/>
+                            <field name="workorder_template_status" widget="badge"/>
                             <field name="state"/>
 
                         </tree>

@@ -21,6 +21,7 @@
                             type="object"
                             string="Cancel Productions"
                             style="background-color:red;color:white" states="draft,confirmed"/>
+                    <field name="workorder_template_status" widget="badge"/>
                     <field name="state" widget="statusbar"
                            statusbar_visible="draft,confirmed,done,cancel"
                            statusbar_colors='{"draft":"blue","confirmed":"orange","done":"green","cancelled":"red"}'/>
@@ -38,49 +39,56 @@
                             <field name="picking_type_id" required="1" attrs="{'readonly':[('state','!=','draft')]}"/>
                             <field name="bom_id" domain="[('product_tmpl_id','=',product_tmpl_id)]" required="1"
                                    attrs="{'readonly':[('state','!=','draft')]}"/>
-                            <field name="order_sequence"
-                                   attrs="{'readonly':[('state','!=','draft')]}"/>
-                            <field name="quantity"/>
-                            <field name="done_qty"/>
                         </group>
                         <group>
-                            <field name="mrp_product_template_line_ids" attrs="{'readonly':[('state','!=','draft')]}">
-                                <tree editable="bottom">
-                                    <field name="product_id"/>
-                                    <field name="quantity"/>
-                                </tree>
-                            </field>
+                            <field name="quantity"/>
+                            <field name="done_qty"/>
                         </group>
                     </group>
                     <notebook>
                         <page string="Workorders">
                             <field name="workorder_template_ids">
-                                <tree editable="bottom">
-                                    <field name="name"/>
-                                    <field name="operation_id"/>
+                                <tree editable="bottom" create="false" delete="false">
+                                    <field name="operation_id" readonly="1"/>
+                                     <field name="name" string="Production Notes"/>
+                                     <field name="production_state" invisible="1"/>
+                                    <field name="duration" widget="mrp_time_counter"/>
+                                    <field name="state" widget="badge" decoration-warning="state == 'in_progress'" decoration-success="state == 'done'" decoration-info="state not in ('in_progress', 'done', 'cancel')" attrs="{'column_invisible': [('parent.state', '=', 'draft')]}"/>
                                     <button name="button_start"
-                                            type="object"
-                                            class="oe_stat_button"
                                             icon="fa-play"
-                                            string="Start"
-                                            attrs="{'column_invisible':[('parent.state','=','draft')]}" />
-                                    <button name="button_pause"
-                                            type="object"
-                                            class="oe_stat_button"
-                                            icon="fa-pause"
-                                            string="Pause"
-                                            attrs="{'column_invisible':[('parent.state','=','draft')]}"/>
-                                    <button name="button_finish"
-                                            type="object"
-                                            class="oe_stat_button"
-                                            icon="fa-check"
-                                            string="Mark Done"
-                                            attrs="{'column_invisible':[('parent.state','=','draft')]}"
-                                           />
+                                            type="object" string="Start" class="btn-success"
+                                            attrs="{'invisible': [('state', 'in', ['in_progress','done','cancel'])]}"/>
+                                    <button name="button_pending" type="object"
+                                            string="Pause" class="btn-warning" icon="fa-pause"
+                                            attrs="{'invisible': [('state', 'in', ['done','cancel','pending','waiting','ready'])]}"/>
+                                    <button name="button_finish" type="object" string="Done"
+                                            class="btn-success"  icon="fa-check"
+                                           attrs="{'invisible': [('state', 'in', ['done','cancel','pending','waiting','ready'])]}"/>
+                                    <button name="print_report" type="object" string="Print" icon="fa-print"
+                                            attrs="{'invisible': [('state', 'not in', ['done',])]}"/>
+
                                 </tree>
                             </field>
                         </page>
+                        <page name="Consumptions" string="Components">
+                            <field name="mrp_product_template_move_ids">
+                                <tree create="false" editable="bottom" delete="false">
+                                    <field name="product_id" readonly="1"/>
+                                    <field name="bom_product_template_attribute_value_ids" widget="many2many_tags" options="{'no_create': True}" readonly="1"/>
+                                    <field name="product_qty" readonly="1"/>
+                                    <field name="quantity_done" attrs="{'readonly':[('parent.state','=','done')]}"/>
+                                </tree>
+                            </field>
+
+                        </page>
                         <page name="Productions" string="Productions">
+                            <field name="mrp_product_template_line_ids" readonly="1">
+                                <tree>
+                                    <field name="product_id"/>
+                                    <field name="quantity"/>
+                                </tree>
+                            </field>
+                            <separator string="Productions"/>
                             <field name="production_ids">
                                 <tree>
                                     <field name="name"/>

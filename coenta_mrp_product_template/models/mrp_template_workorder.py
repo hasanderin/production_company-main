@@ -19,6 +19,33 @@ class MrpTemplateWorkorder(models.Model):
 
     workorder_ids = fields.One2many('mrp.workorder','workorder_template_id','Work Orders')
 
+    state = fields.Selection([
+        ('pending', 'Pending'),
+        ('waiting', 'Waiting'),
+        ('ready', 'Ready'),
+        ('in_progress', 'In Progress'),
+        ('done', 'Done'),
+        ('cancel', 'Cancelled'),
+    ], string='Status', default='pending', track_visibility='onchange')
+
+    production_state = fields.Selection(related="mrp_template_id.state",string='Production State',store=True)
+
+
+
+    duration = fields.Float(
+        'Real Duration', compute='_compute_duration',
+        readonly=False,  copy=False)
+
+
+    @api.depends('workorder_ids','workorder_ids.time_ids','workorder_ids.duration')
+    def _compute_duration(self):
+        for rec in self:
+            rec.duration = 0
+            if rec.workorder_ids:
+                workorders = rec.workorder_ids.filtered(lambda x: x.state not in ['cancel'])
+                if workorders:
+                    rec.duration = sum(workorders.mapped('duration'))/len(workorders)
+
 
     def button_start(self):
         self.ensure_one()
@@ -26,14 +53,16 @@ class MrpTemplateWorkorder(models.Model):
             raise UserError(_('No work orders to start.'))
         for workorder in self.workorder_ids:
             workorder.button_start()
+            self.state= 'in_progress'
         return True
 
-    def button_pause(self):
+    def button_pending(self):
         self.ensure_one()
         if not self.workorder_ids:
             raise UserError(_('No work orders to finish.'))
         for workorder in self.workorder_ids:
-            workorder.button_pause()
+            workorder.button_pending()
+        self.state = 'pending'
         return True
 
     def button_finish(self):
@@ -42,4 +71,11 @@ class MrpTemplateWorkorder(models.Model):
             raise UserError(_('No work orders to end.'))
         for workorder in self.workorder_ids:
             workorder.button_finish()
+        self.state = 'done'
         return True
+
+
+    def print_report(self):
+        self.ensure_one()
+        action = self.env.ref('coenta_mrp_product_template.action_report_work_order').report_action(self)
+        return action

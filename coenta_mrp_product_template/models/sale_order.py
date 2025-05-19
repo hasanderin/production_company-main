@@ -22,4 +22,15 @@ class SaleOrder(models.Model):
 
 
 
+    def action_open_product_template(self):
+        self.ensure_one()
+        action = self.env.ref('coenta_mrp_product_template.mrp_product_template_act_window').read()[0]
+        if len(self.mrp_product_template_ids) == 1:
+            action['views'] = [(self.env.ref('coenta_mrp_product_template.mrp_product_template_form_view').id, 'form')]
+            action['res_id'] = self.mrp_product_template_ids[0].id
+        else:
+            action['views'] = [(self.env.ref('coenta_mrp_product_template.mrp_product_template_tree_view').id, 'tree'),
+                               (self.env.ref('coenta_mrp_product_template.mrp_product_template_form_view').id, 'form')]
+            action['domain'] = [('id', 'in', self.mrp_product_template_ids.ids)]
+        return action
 

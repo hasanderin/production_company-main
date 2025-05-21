@@ -46,16 +46,13 @@ class SaleOrder(models.Model):
 
 
     def create_sale_production_notes(self):
-        wc = self.env['mrp.workcenter'].search([])
         for record in self:
             templates = record.order_line.mapped('product_id').mapped('product_tmpl_id')
             for template in templates:
-                for workcenter in wc:
-                    self.env['sale.production.note'].create({
-                        'sale_id': record.id,
-                        'product_template_id': template.id,
-                        'workcenter_id': workcenter.id,
-                    })
+                self.env['sale.production.note'].create({
+                    'sale_id': record.id,
+                    'product_template_id': template.id,
+                })
 
 
 

@@ -5,7 +5,6 @@ from odoo import _, api, fields, models
 from odoo.exceptions import UserError
 
 class MrpProductTemplate(models.Model):
-
     _name = "mrp.product.template"
     _inherit = ["mail.thread", "mail.activity.mixin"]
     _description = "Mrp Product Template"  # TODO
@@ -15,7 +14,10 @@ class MrpProductTemplate(models.Model):
 
     sale_id = fields.Many2one('sale.order','Sale')
 
+    partner_id = fields.Many2one('res.partner', 'Customer', related='sale_id.partner_id', store=True)
+    commitment_date = fields.Datetime('Commitment Date', related='sale_id.commitment_date', store=True)
 
+    mrp_template_workorder_note_ids = fields.One2many('mrp.template.workorder.note', 'mrp_template_id', string='Workorder Notes')
 
     picking_type_id = fields.Many2one(
         'stock.picking.type', 'Operation Type',
@@ -88,50 +90,50 @@ class MrpProductTemplate(models.Model):
 
     def button_create_productions(self):
         for rec in self:
-            for rec in self:
-                if rec.bom_id:
-                    if rec.bom_id.operation_ids:
-                        rec.workorder_template_ids = [(5, 0, 0)]
-                        for operation in rec.bom_id.operation_ids:
-                            self.env['mrp.template.workorder'].create({
-                                'operation_id': operation.id,
-                                'mrp_template_id': rec.id,
+            if rec.bom_id:
+                if rec.bom_id.operation_ids:
+                    rec.workorder_template_ids = [(5, 0, 0)]
+                    for operation in rec.bom_id.operation_ids:
+                        self.env['mrp.template.workorder'].create({
+                            'operation_id': operation.id,
+                            'mrp_template_id': rec.id,
+            })
+                if rec.bom_id.bom_line_ids:
+                    rec.mrp_product_template_move_ids = [(5, 0, 0)]
+                    for line in rec.bom_id.bom_line_ids:
+                        self.env['mrp.product.template.move'].create({
+                            'product_id': line.product_id.id,
+                            'mrp_product_template_id': rec.id,
+                            'product_qty': line.product_qty,
+                            'product_uom_id': line.product_uom_id.id,
+                            'quantity_done':line.product_qty,
+                            'operation_id': line.operation_id.id,
+                            'bom_product_template_attribute_value_ids': [(6, 0, line.bom_product_template_attribute_value_ids.ids)],
+                        })
+
+        for line in rec.mrp_product_template_line_ids:
+            if line.quantity:
+                production = self.env['mrp.production'].create({
+                    'product_id': line.product_id.id,
+                    'product_qty': line.quantity,
+                    'product_uom_id': line.product_id.uom_id.id,
+                    'bom_id': rec.bom_id.id,
+                    'coenta_product_template_id': rec.id,
+                    'picking_type_id':rec.picking_type_id.id,
                 })
-                    if rec.bom_id.bom_line_ids:
-                        rec.mrp_product_template_move_ids = [(5, 0, 0)]
-                        for line in rec.bom_id.bom_line_ids:
-                            self.env['mrp.product.template.move'].create({
-                                'product_id': line.product_id.id,
-                                'mrp_product_template_id': rec.id,
-                                'product_qty': line.product_qty,
-                                'product_uom_id': line.product_uom_id.id,
-                                'quantity_done':line.product_qty,
-                                'bom_product_template_attribute_value_ids': [(6, 0, line.bom_product_template_attribute_value_ids.ids)],
-                            })
+                production._create_update_move_finished()
+                production._onchange_move_raw()
+                production._create_workorder()
+                production._plan_workorders()
+                production.action_confirm()
+                for workorder in production.workorder_ids:
+                    operation = rec.workorder_template_ids.filtered(lambda l: l.operation_id == workorder.operation_id)
+                    if operation:
+                        workorder.write({'workorder_template_id': operation[0].id})
+                for move in production.move_raw_ids:
+                    move.coenta_product_move_id = rec.mrp_product_template_move_ids.filtered(lambda l: l.product_id == move.product_id)[0].id
 
-            for line in rec.mrp_product_template_line_ids:
-                if line.quantity:
-                    production = self.env['mrp.production'].create({
-                        'product_id': line.product_id.id,
-                        'product_qty': line.quantity,
-                        'product_uom_id': line.product_id.uom_id.id,
-                        'bom_id': rec.bom_id.id,
-                        'coenta_product_template_id': rec.id,
-                        'picking_type_id':rec.picking_type_id.id,
-                    })
-                    production._create_update_move_finished()
-                    production._onchange_move_raw()
-                    production._create_workorder()
-                    production._plan_workorders()
-                    production.action_confirm()
-                    for workorder in production.workorder_ids:
-                        operation = rec.workorder_template_ids.filtered(lambda l: l.operation_id == workorder.operation_id)
-                        if operation:
-                            workorder.write({'workorder_template_id': operation[0].id})
-                    for move in production.move_raw_ids:
-                        move.coenta_product_move_id = rec.mrp_product_template_move_ids.filtered(lambda l: l.product_id == move.product_id)[0].id
-
-            rec.state= 'confirmed'
+        rec.state= 'confirmed'
 
 
     def button_mark_done(self):
@@ -167,3 +169,13 @@ class MrpProductTemplate(models.Model):
                 rec.workorder_template_status = ', '.join(rec.workorder_template_ids.filtered(lambda x: x.state =='in_progress').mapped('operation_id.name'))
             else:
                 rec.workorder_template_status = 'Başlamadı'
+
+
+    def button_open_sale_id(self):
+        return{
+            'name': _('Sale Order'),
+            'view_mode': 'form',
+            'res_model': 'sale.order',
+            'type': 'ir.actions.act_window',
+            'res_id': self.sale_id.id,
+        }

@@ -25,9 +25,10 @@
                     <field name="mrp_product_template_ids" invisible="1"/>
                     <field name="sale_production_note_ids" context="{'default_sale_order_id': id}">
                         <tree editable="bottom">
+                            <field name="sequence" widget="handle"/>
                             <field name="domain_product_template_ids" invisible="1"/>
                             <field name="product_template_id" domain="[('id','in',domain_product_template_ids)]"/>
-                            <field name="workcenter_id" />
+                            <!-- <field name="workcenter_id" /> -->
                             <field name="name" string="Production Notes"/>
                             <field name="image" widget="image" class="oe_avatar"/>
 
@@ -44,6 +45,9 @@
                         </tree>
                     </field>
                 </page> -->
+            </xpath>
+            <xpath expr="//label[@for='pricelist_id']" position="before">
+                <field name="commitment_date"/>
             </xpath>
         </field>
     </record>

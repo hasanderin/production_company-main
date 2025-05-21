@@ -9,3 +9,4 @@ from . import mrp_product_template_move
 from . import product_product
 from . import product_attribute
 from . import sale_production_note
+from . import mrp_template_workorder_note

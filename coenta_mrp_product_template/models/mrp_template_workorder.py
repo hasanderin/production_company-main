@@ -12,36 +12,60 @@ class MrpTemplateWorkorder(models.Model):
 
 
     mrp_template_id = fields.Many2one('mrp.product.template','Template')
-    name = fields.Char('Production Notes',compute="_compute_sale_information")
+    name = fields.Char('Production Notes')
     production_id = fields.Many2one('mrp.production','Production')
     operation_id = fields.Many2one('mrp.routing.workcenter','Work Order')
+
+
+    workorder_note_ids = fields.One2many('mrp.template.workorder.note','workorder_id','Work Order Notes')
+
+    planned_start_date = fields.Datetime('Planned Start Date')
+    planned_end_date = fields.Datetime('Planned End Date')
+
+    workorder_note_count = fields.Integer(compute='_compute_workorder_note_count', string='Work Order Notes Count')
+
+    @api.depends('workorder_note_ids')
+    def _compute_workorder_note_count(self):
+        for rec in self:
+            if rec.workorder_note_ids:
+                rec.workorder_note_count = len(rec.workorder_note_ids)
+            else:
+                rec.workorder_note_count =0
+
+    def name_get(self):
+        result = []
+        for rec in self:
+            name = rec.name or rec.operation_id.name
+            result.append((rec.id, name))
+        return result
+
 
     workcenter_id = fields.Many2one('mrp.workcenter','Work Center',compute='_compute_sale_information')
     image = fields.Binary('Image',compute='_compute_sale_information')
 
 
-    def _compute_sale_information(self):
-        for rec in self:
-            if rec.mrp_template_id:
-                rec.name = False
-                rec.image = False
-                rec.workcenter_id = False
-                sale_id = rec.mrp_template_id.sale_id
-                filtered_sale_notes = sale_id.sale_production_note_ids.filtered(lambda x: x.product_template_id.id == rec.mrp_template_id.product_tmpl_id.id)
-                found = filtered_sale_notes.filtered(lambda x: x.workcenter_id.id == rec.operation_id.workcenter_id.id)
-                if found:
-                    found= found[0]
-                    rec.name = found.name
-                    rec.image = found.image
-                    rec.workcenter_id= found.workcenter_id.id
-                else:
-                    rec.name = False
-                    rec.workcenter_id = False
-                    rec.image = False
-            else:
-                rec.workcenter_id = False
-                rec.image = False
-                rec.name = False
+    # def _compute_sale_information(self):
+    #     for rec in self:
+    #         if rec.mrp_template_id:
+    #             rec.name = False
+    #             rec.image = False
+    #             rec.workcenter_id = False
+    #             sale_id = rec.mrp_template_id.sale_id
+    #             #filtered_sale_notes = sale_id.sale_production_note_ids.filtered(lambda x: x.product_template_id.id == rec.mrp_template_id.product_tmpl_id.id)
+    #             #found = filtered_sale_notes.filtered(lambda x: x.workcenter_id.id == rec.operation_id.workcenter_id.id)
+    #             # if found:
+    #             #     found= found[0]
+    #             #     rec.name = found.name
+    #             #     rec.image = found.image
+    #             #     rec.workcenter_id= found.workcenter_id.id
+    #             # else:
+    #             #     rec.name = False
+    #             #     rec.workcenter_id = False
+    #             #     rec.image = False
+    #         else:
+    #             rec.workcenter_id = False
+    #             rec.image = False
+    #             rec.name = False
 
     workorder_ids = fields.One2many('mrp.workorder','workorder_template_id','Work Orders')
 

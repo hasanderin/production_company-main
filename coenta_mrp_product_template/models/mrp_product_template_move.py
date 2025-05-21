@@ -15,6 +15,7 @@ class MrpProductTemplateMove(models.Model):
     product_qty = fields.Float('Product Quantity')
     product_uom_id = fields.Many2one('uom.uom', 'Product UoM')
     quantity_done = fields.Float('Quantity Done')
+    operation_id = fields.Many2one('mrp.routing.workcenter','Operation')
 
     bom_product_template_attribute_value_ids = fields.Many2many(
         'product.template.attribute.value', string="Apply on Variants", ondelete='restrict',

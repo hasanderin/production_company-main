@@ -11,3 +11,5 @@ class MrpProduction(models.Model):
 
 
     coenta_product_template_id = fields.Many2one('mrp.product.template', string='Product Template')
+
+

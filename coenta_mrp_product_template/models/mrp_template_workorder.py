@@ -40,8 +40,8 @@ class MrpTemplateWorkorder(models.Model):
         return result
 
 
-    workcenter_id = fields.Many2one('mrp.workcenter','Work Center',compute='_compute_sale_information')
-    image = fields.Binary('Image',compute='_compute_sale_information')
+    workcenter_id = fields.Many2one('mrp.workcenter','Work Center')
+    image = fields.Binary('Image')
 
 
     # def _compute_sale_information(self):

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
     <template id="report_work_order_document">
-        <t t-call="web.internal_layout">
+        <t t-call="web.external_layout">
             <t t-set="o" t-value="o.with_context()"/>
             <div class="page">
                 <style>
@@ -26,20 +26,44 @@
                         </tr>
                     </table>
                 </div>
-                <div class="row mb16">
-                    <div class="col-6">
-                        <span style="font-weight:bold">Manufacture Order:&#160;</span> <span
-                            t-field="o.mrp_template_id.name"/><br/>
-                        <span style="font-weight:bold">Product:&#160;</span> <span
-                            t-field="o.mrp_template_id.product_tmpl_id.name"/><br/>
-                        <span style="font-weight:bold">Work Center:&#160;</span> <span
-                            t-field="o.operation_id.name"/><br/>
-                    </div>
-                    <div class="col-6">
-                        <span style="font-weight:bold">Planned Start Date:&#160;</span> <span
-                            t-field="o.planned_start_date"/><br/>
-                        <span style="font-weight:bold">Planned End Date:&#160; </span><span
-                            t-field="o.planned_end_date"/><br/>
+                <div class="row mt8 mb8">
+                    <div class="col-12">
+                        <table class="table table-bordered">
+                            <tr>
+                                <th>
+                                    Manufacture Order
+                                </th>
+                                <th>
+                                    Product
+                                </th>
+                                <th>
+                                    Work Center
+                                </th>
+                                <th>
+                                    Planned Start Date
+                                </th>
+                                <th>
+                                    Planned End Date
+                                </th>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <span t-field="o.mrp_template_id.name"/>
+                                </td>
+                                <td>
+                                    <span t-field="o.mrp_template_id.product_tmpl_id.display_name"/>
+                                </td>
+                                <td>
+                                    <span t-field="o.operation_id.name"/>
+                                </td>
+                                <td>
+                                    <span t-field="o.planned_start_date"/>
+                                </td>
+                                <td>
+                                    <span t-field="o.planned_end_date"/>
+                                </td>
+                            </tr>
+                        </table>
                     </div>
                 </div>
 
@@ -158,7 +182,7 @@
 
     <template id="report_mrp_product_teplate_document">
         <t t-foreach="docs" t-as="o">
-            <t t-call="web.internal_layout">
+            <t t-call="web.external_layout">
                 <t t-set="o" t-value="o.with_context()"/>
                 <div class="page">
                     <style>
@@ -192,6 +216,9 @@
                                         <th>
                                             Production Code
                                         </th>
+                                        <th>
+                                            Planned Start Date
+                                        </th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -210,6 +237,9 @@
                                         </td>
                                         <td>
                                             <span t-field="o.name"/>
+                                        </td>
+                                        <td>
+                                            <span t-field="o.date_planned_start"/>
                                         </td>
                                     </tr>
                                 </tbody>

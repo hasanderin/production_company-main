@@ -14,6 +14,8 @@ class MrpProductTemplate(models.Model):
 
     sale_id = fields.Many2one('sale.order','Sale')
 
+    date_planned_start = fields.Datetime('Planned Start Date',default=lambda self: fields.Datetime.now())
+
     partner_id = fields.Many2one('res.partner', 'Customer', related='sale_id.partner_id', store=True)
     commitment_date = fields.Datetime('Commitment Date', related='sale_id.commitment_date', store=True)
 
@@ -120,6 +122,8 @@ class MrpProductTemplate(models.Model):
                     'bom_id': rec.bom_id.id,
                     'coenta_product_template_id': rec.id,
                     'picking_type_id':rec.picking_type_id.id,
+                    'date_planned_start': rec.date_planned_start,
+                    'origin':rec.sale_id.name or "",
                 })
                 production._create_update_move_finished()
                 production._onchange_move_raw()

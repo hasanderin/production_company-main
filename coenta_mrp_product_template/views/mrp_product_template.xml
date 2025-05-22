@@ -45,6 +45,7 @@
                                    attrs="{'readonly':[('state','!=','draft')]}"/>
                         </group>
                         <group>
+                            <field name="date_planned_start"/>
                             <field name="partner_id"/>
                             <field name="sale_id"/>
                             <field name="commitment_date"/>

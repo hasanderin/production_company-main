@@ -1,0 +1,436 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <template id="report_work_order_document">
+        <t t-call="web.external_layout">
+            <t t-set="o" t-value="o.with_context()"/>
+            <div class="page">
+                <style>
+                    .table-bordered > thead > tr > th,
+                    .table-bordered > tbody > tr > th,
+                    .table-bordered > tfoot > tr > th,
+                    .table-bordered > thead > tr > td,
+                    .table-bordered > tbody > tr > td,
+                    .table-bordered > tfoot > tr > td {
+                    border: 1px solid #000000;
+                    }
+                </style>
+                <div class="row">
+                    <table class="table table-bordered">
+                        <tr>
+                            <td class="text-center">
+                                <span style="font-weight:bold;font-size:32pt;text-transform: uppercase"
+                                      t-field="o.operation_id.name"/>
+                                <span style="font-weight:bold;font-size:32pt;text-transform: uppercase">
+                                    &#160;FÖYÜ</span>
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+                <div class="row mt8 mb8">
+                    <div class="col-12">
+                        <table class="table table-bordered">
+                            <tr>
+                                <th>
+                                    Manufacture Order
+                                </th>
+                                <th>
+                                    Product
+                                </th>
+                                <th>
+                                    Work Center
+                                </th>
+                                <th>
+                                    Planned Start Date
+                                </th>
+                                <th>
+                                    Planned End Date
+                                </th>
+                                <th>
+                                    Customer
+                                 </th>
+                                 <th>
+                                    Sale
+                                    </th>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <span t-field="o.mrp_template_id.name"/>
+                                </td>
+                                <td>
+                                    <span t-field="o.mrp_template_id.product_tmpl_id.display_name"/>
+                                </td>
+                                <td>
+                                    <span t-field="o.operation_id.name"/>
+                                </td>
+                                <td>
+                                    <span t-field="o.planned_start_date"/>
+                                </td>
+                                <td>
+                                    <span t-field="o.planned_end_date"/>
+                                </td>
+                                <td>
+                                    <span t-field="o.mrp_template_id.sale_id.partner_id.name"/>
+                                </td>
+                                <td>
+                                	<span t-field="o.mrp_template_id.sale_id.name"/>
+                                </td>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+
+                <t t-foreach="o.workorder_ids.mapped('product_id.product_color_attribute_id')" t-as="color">
+                    <div class="row mb16">
+                        <div class="col-12">
+                            <t t-set="boyutlar"
+                               t-value="o.workorder_ids.mapped('product_id').filtered(lambda l:l.product_color_attribute_id==color)"/>
+                            <table class="table table-bordered mt-16"
+                                   style="vertical-align:middle; font-size:10pt; text-align:left">
+                                <thead>
+                                    <tr style="background-color: #f2f2f2;font-size:bold;">
+                                        <td>
+                                            Renk: <span t-esc="color.name"/>
+                                        </td>
+                                        <t t-foreach="boyutlar" t-as="b">
+                                            <td>
+                                                <span t-field="b.product_size_attribute_id.name"/>
+
+                                            </td>
+                                        </t>
+                                        <td>Total</td>
+                                    </tr>
+                                    <tr style="background-color: #f2f2f2;font-size:bold;">
+                                        <td>
+                                            Adetler
+                                        </td>
+                                        <t t-set="adetler_toplam" t-value="0"/>
+                                        <t t-foreach="o.workorder_ids.filtered(lambda l:l.product_id.product_color_attribute_id==color)"
+                                           t-as="w">
+                                            <td>
+                                                <span t-field="w.production_id.product_qty"/>
+                                                <span t-field="w.production_id.product_uom_id.name"/>
+                                                <t t-set="adetler_toplam"
+                                                   t-value="adetler_toplam + w.production_id.product_qty"/>
+
+                                            </td>
+                                        </t>
+                                        <td>
+                                            <span t-esc="'%.0f'%adetler_toplam"/>
+                                        </td>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <t t-foreach="o.mrp_template_id.mrp_product_template_move_ids.filtered(lambda l:l.operation_id ==o.operation_id or not l.operation_id)"
+                                       t-as="raw">
+                                        <tr>
+                                            <td>
+                                                <span t-field="raw.product_id.display_name"/>
+                                            </td>
+                                            <t t-set="raw_total" t-value="0"/>
+                                            <t t-foreach="o.workorder_ids.filtered(lambda l:l.product_id.product_color_attribute_id==color)"
+                                               t-as="workorder">
+                                                <t t-foreach="workorder.production_id.move_raw_ids" t-as="praw">
+                                                    <t t-if="raw.product_id == praw.product_id">
+                                                        <td>
+                                                            <span t-field="praw.product_uom_qty"/>
+                                                            <span t-field="praw.product_uom.name"/>
+                                                            <t t-set="raw_total"
+                                                               t-value="raw_total + praw.product_uom_qty"/>
+                                                        </td>
+                                                    </t>
+                                                </t>
+                                                <t t-if="raw.product_id not in workorder.production_id.move_raw_ids.mapped('product_id')">
+                                                    <td>
+                                                        NA
+                                                    </td>
+                                                </t>
+                                            </t>
+                                            <td>
+                                                <span t-esc="'%.2f'%raw_total"/>
+                                            </td>
+                                        </tr>
+                                    </t>
+                                    <tr/>
+                                </tbody>
+
+                            </table>
+                        </div>
+                    </div>
+                </t>
+                <t t-set="notes"
+                   t-value="o.workorder_note_ids"/>
+                <t t-foreach="notes" t-as="note">
+                    <div class="row mb16">
+                        <div class="col-12">
+                            <table class="table table-bordered">
+                                <tr>
+                                    <td style="width: 50%;">
+                                        <b>Production Notes</b>
+                                        <br/>
+                                        <span t-field="note.name"/>
+
+                                    </td>
+                                    <td style="width: 50%;">
+                                        <img t-if="note.image" t-att-src="image_data_uri(note.image)"
+                                             style="max-width:9cm;" alt="Logo"/>
+                                    </td>
+                                </tr>
+                            </table>
+                        </div>
+
+                    </div>
+                </t>
+            </div>
+        </t>
+    </template>
+
+    <template id="report_template_workorder">
+        <t t-call="web.html_container">
+            <t t-foreach="docs" t-as="o">
+                <t t-call="coenta_mrp_product_template.report_work_order_document"/>
+            </t>
+        </t>
+    </template>
+
+    <template id="report_mrp_product_teplate_document">
+        <t t-foreach="docs" t-as="o">
+            <t t-call="web.external_layout">
+                <t t-set="o" t-value="o.with_context()"/>
+                <div class="page">
+                    <style>
+                        .table-bordered > thead > tr > th,
+                        .table-bordered > tbody > tr > th,
+                        .table-bordered > tfoot > tr > th,
+                        .table-bordered > thead > tr > td,
+                        .table-bordered > tbody > tr > td,
+                        .table-bordered > tfoot > tr > td {
+                        border: 1px solid #000000;
+                        }
+                    </style>
+                    <div class="row mb16 mb-16">
+                        <div class="col-12">
+                            <table class="table table-bordered"
+                                   style="vertical-align:middle; font-size:10pt; text-align:left">
+                                <thead>
+                                    <tr>
+                                        <th class="col-xs-3">
+                                            Partner
+                                        </th>
+                                        <th>
+                                            Sale
+                                        </th>
+                                        <th class="col-xs-3">
+                                            Product
+                                        </th>
+                                        <th class="col-xs-3">
+                                            Commitment Date
+                                        </th>
+                                        <th>
+                                            Production Code
+                                        </th>
+                                        <th>
+                                            Planned Start Date
+                                        </th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>
+                                            <span t-field="o.partner_id.name"/>
+                                        </td>
+                                        <td>
+                                            <span t-field="o.sale_id.name"/>
+                                        </td>
+                                        <td>
+                                            <span t-field="o.product_tmpl_id.name"/>
+                                        </td>
+                                        <td>
+                                            <span t-field="o.commitment_date"/>
+                                        </td>
+                                        <td>
+                                            <span t-field="o.name"/>
+                                        </td>
+                                        <td>
+                                            <span t-field="o.date_planned_start"/>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-12">
+                            <table class="table table-bordered"
+                                   style="vertical-align:middle; font-size:10pt; text-align:left">
+                                <thead>
+                                    <tr>
+                                        <th class="col-xs-3">
+                                            <span t-field="o.product_tmpl_id.name"/>
+                                        </th>
+                                        <t t-foreach="o.mrp_product_template_line_ids.mapped('product_id.product_size_attribute_id')"
+                                           t-as="size">
+                                            <th>
+                                                <span t-field="size.name"/>
+                                            </th>
+                                        </t>
+                                        <th style="font-weight:bold;">
+                                            Total
+                                        </th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <t t-foreach="o.mrp_product_template_line_ids.mapped('product_id.product_color_attribute_id')"
+                                       t-as="color">
+                                        <t t-set="line_total" t-value="0"/>
+                                        <tr>
+                                            <td>
+                                                <span t-field="color.name"/>
+                                            </td>
+                                            <t t-foreach="o.mrp_product_template_line_ids.mapped('product_id.product_size_attribute_id')"
+                                               t-as="size">
+                                                <t t-set="line"
+                                                   t-value="o.mrp_product_template_line_ids.filtered(lambda l:l.product_id.product_color_attribute_id == color and l.product_id.product_size_attribute_id == size)"/>
+                                                <td>
+                                                    <span t-field="line.quantity"/>
+                                                    <t t-set="line_total" t-value="line_total + line.quantity"/>
+
+                                                </td>
+                                            </t>
+                                            <td style="font-weight:bold;">
+                                                <span t-esc="line_total"/>
+                                            </td>
+
+                                        </tr>
+
+                                    </t>
+                                    <tr style="font-weight:bold;">
+                                        <td>
+                                            Total
+                                        </td>
+
+                                        <t t-foreach="o.mrp_product_template_line_ids.mapped('product_id.product_size_attribute_id')"
+                                           t-as="size">
+                                            <td>
+                                                <t t-set="lines"
+                                                   t-value="o.mrp_product_template_line_ids.filtered(lambda l:l.product_id.product_size_attribute_id == size)"/>
+                                                <span t-esc="sum(lines.mapped('quantity'))"/>
+                                            </td>
+
+                                        </t>
+                                        <td style="font-weight:bold;">
+                                            <span t-field="o.quantity"/>
+                                        </td>
+                                    </tr>
+
+                                </tbody>
+
+                            </table>
+                        </div>
+                    </div>
+                </div>
+                <div class="row mt16 mb15">
+                    <div class="col-12">
+                        <u style="font-weight:bold;font-size:14pt;">Components</u>
+                    </div>
+                </div>
+                <t t-as="color"
+                   t-foreach="o.mrp_product_template_line_ids.mapped('product_id.product_color_attribute_id')">
+                    <div class="row mt8">
+                        <div class="col-12">
+                            <table class="table table-bordered"
+                                   style="vertical-align:middle; font-size:10pt; text-align:left">
+                                <thead>
+                                    <tr>
+                                        <th class="col-xs-3">
+                                            <span t-esc="color.name"/>
+                                        </th>
+                                        <th class="col-xs-3">
+                                            Apply On Variants
+                                        </th>
+                                        <th>
+                                            Operation
+                                        </th>
+                                        <th>
+                                            Unit Quantity
+                                        </th>
+
+                                        <th>
+                                            Total Matarial QTY
+                                        </th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <t t-foreach="o.mrp_product_template_move_ids" t-as="line">
+                                        <tr>
+                                            <td>
+                                                <span t-esc="line.product_id.display_name"/>
+                                            </td>
+                                            <td>
+                                                <span t-field="line.bom_product_template_attribute_value_ids"/>
+                                            </td>
+                                            <td>
+                                                <span t-field="line.operation_id.name"/>
+                                            </td>
+
+                                            <td>
+                                                <span t-field="line.quantity_done"/>
+                                            </td>
+                                            <td>
+                                                <t t-set="rawline"
+                                                   t-value="o.production_ids.filtered(lambda l:l.product_id.product_color_attribute_id==color).mapped('move_raw_ids').filtered(lambda l:l.product_id == line.product_id)"/>
+                                                <t t-set="rawline_total"
+                                                   t-value="sum(rawline.mapped('product_uom_qty'))"/>
+                                                <span t-esc="rawline_total"/>
+                                            </td>
+
+                                        </tr>
+
+                                    </t>
+
+                                </tbody>
+
+                            </table>
+                        </div>
+                    </div>
+
+                </t>
+
+                <div class="row mt16 mb15">
+                    <div class="col-12">
+                        <u style="font-weight:bold;font-size:14pt;">Sale Production Notes</u>
+                    </div>
+                </div>
+                <t t-set="notes"
+                           t-value="o.sale_id.sale_production_note_ids.filtered(lambda l:l.product_template_id==o.product_tmpl_id)"/>
+                        <t t-foreach="notes" t-as="note">
+                            <div class="row mb16 mt16">
+                                <div class="col-12">
+                                    <table class="table table-bordered">
+                                        <tr>
+                                            <td style="width: 50%;">
+                                                <span t-field="note.name"/>
+                                            </td>
+                                            <td style="width: 50%;">
+                                                <img t-if="note.image" t-att-src="image_data_uri(note.image)"
+                                                     style="max-width:9cm;" alt="Logo"/>
+                                            </td>
+                                        </tr>
+                                    </table>
+                                </div>
+
+                            </div>
+                        </t>
+
+
+            </t>
+        </t>
+    </template>
+
+    <template id="report_mrp_product_teplate">
+        <t t-call="web.html_container">
+            <t t-foreach="docs" t-as="doc">
+                <t t-call="coenta_mrp_product_template.report_mrp_product_teplate_document"/>
+            </t>
+        </t>
+    </template>
+</odoo>

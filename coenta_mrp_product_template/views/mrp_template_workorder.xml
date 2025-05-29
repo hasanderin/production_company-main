@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Copyright 2025 Coenta Team
+     License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl). -->
+
+<odoo>
+
+
+    <record model="ir.ui.view" id="mrp_template_workorder_tree_view">
+        <field name="model">mrp.template.workorder</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="operation_id" readonly="1"/>
+                <field name="name" string="Production Notes"/>
+                <field name="production_state" invisible="1"/>
+                <field name="duration" widget="mrp_time_counter"/>
+                <field name="state" widget="badge" decoration-warning="state == 'in_progress'"
+                       decoration-success="state == 'done'"
+                       decoration-info="state not in ('in_progress', 'done', 'cancel')"
+                       attrs="{'column_invisible': [('parent.state', '=', 'draft')]}"/>
+                <button name="button_start"
+                        icon="fa-play"
+                        type="object" string="Start" class="btn-success"
+                        attrs="{'invisible': [('state', 'in', ['in_progress','done','cancel'])]}"/>
+                <button name="button_pending" type="object"
+                        string="Pause" class="btn-warning" icon="fa-pause"
+                        attrs="{'invisible': [('state', 'in', ['done','cancel','pending','waiting','ready'])]}"/>
+                <button name="button_finish" type="object" string="Done"
+                        class="btn-success" icon="fa-check"
+                        attrs="{'invisible': [('state', 'in', ['done','cancel','pending','waiting','ready'])]}"/>
+                 <button name="print_report" type="object" string="Print" icon="fa-print"
+                                           />
+            </tree>
+        </field>
+    </record>
+
+</odoo>

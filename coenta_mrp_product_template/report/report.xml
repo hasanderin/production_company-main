@@ -1,0 +1,26 @@
+<odoo>
+
+
+    <data>
+        <report
+            string="Work Order Label"
+            id="action_report_work_order"
+            model="mrp.template.workorder"
+            report_type="qweb-pdf"
+            name="coenta_mrp_product_template.report_template_workorder"
+            file="acoenta_mrp_product_template.report_template_workorder"
+            print_report_name="'Work Order Label - %s' % (object.operation_id.name)"
+        />
+        <report
+            string="Template Work Order Label"
+            id="action_report_work_order_2"
+            model="mrp.product.template"
+            report_type="qweb-pdf"
+            name="coenta_mrp_product_template.report_mrp_product_teplate"
+            file="acoenta_mrp_product_template.report_mrp_product_teplate"
+            print_report_name=""
+            />
+	</data>
+
+
+</odoo>

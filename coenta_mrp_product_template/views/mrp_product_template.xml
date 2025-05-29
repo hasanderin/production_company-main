@@ -1,0 +1,194 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Copyright 2025 Coenta Team
+     License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl). -->
+
+<odoo>
+
+    <record model="ir.ui.view" id="mrp_product_template_form_view">
+        <field name="model">mrp.product.template</field>
+        <field name="arch" type="xml">
+            <form>
+                <header>
+                    <button name="button_create_productions"
+                            type="object"
+                            string="Create Productions"
+                            class="oe_highlight" states="draft"/>
+                    <button name="button_mark_done"
+                            type="object"
+                            string="Mark Done"
+                            class="oe_highlight" states="confirmed"/>
+                    <button name="button_cancel_productions"
+                            type="object"
+                            string="Cancel Productions"
+                            style="background-color:red;color:white" states="draft,confirmed"/>
+                    <field name="workorder_template_status" widget="badge"/>
+                    <field name="state" widget="statusbar"
+                           statusbar_visible="draft,confirmed,done,cancel"
+                           statusbar_colors='{"draft":"blue","confirmed":"orange","done":"green","cancelled":"red"}'/>
+                </header>
+                <sheet>
+                    <div class="oe_button_box" name="button_box">
+                        <button class="oe_stat_button" name="button_open_sale_id"  type="object" icon="fa-ticket" string="Sale"/>
+                    </div>
+                    <div class="oe_title">
+                        <label for="name" class="oe_edit_only"/>
+                        <h1>
+                            <field name="name" readonly="1"/>
+                        </h1>
+                    </div>
+
+                    <group>
+                        <group>
+                            <field name="product_tmpl_id" attrs="{'readonly':[('state','!=','draft')]}"/>
+                            <field name="picking_type_id" required="1" attrs="{'readonly':[('state','!=','draft')]}"/>
+                            <field name="bom_id" domain="[('product_tmpl_id','=',product_tmpl_id)]" required="1"
+                                   attrs="{'readonly':[('state','!=','draft')]}"/>
+                        </group>
+                        <group>
+                            <field name="date_planned_start"/>
+                            <field name="partner_id"/>
+                            <field name="sale_id"/>
+                            <field name="commitment_date"/>
+                            <field name="quantity"/>
+                            <field name="done_qty"/>
+                        </group>
+                    </group>
+                    <notebook>
+                        <page string="Workorders">
+                            <field name="workorder_template_ids">
+                                <tree editable="bottom" create="false" delete="false">
+                                    <field name="operation_id" readonly="1"/>
+                                     <field name="workorder_note_count"/>
+                                    <field name="planned_start_date"/>
+                                    <field name="planned_end_date"/>
+                                     <field name="production_state" invisible="1"/>
+                                    <field name="duration" widget="mrp_time_counter"/>
+                                    <field name="state" widget="badge" decoration-warning="state == 'in_progress'" decoration-success="state == 'done'" decoration-info="state not in ('in_progress', 'done', 'cancel')" attrs="{'column_invisible': [('parent.state', '=', 'draft')]}"/>
+                                    <button name="button_start"
+                                            icon="fa-play"
+                                            type="object" string="Start" class="btn-success"
+                                            attrs="{'invisible': [('state', 'in', ['in_progress','done','cancel'])]}"/>
+                                    <button name="button_pending" type="object"
+                                            string="Pause" class="btn-warning" icon="fa-pause"
+                                            attrs="{'invisible': [('state', 'in', ['done','cancel','pending','waiting','ready'])]}"/>
+                                    <button name="button_finish" type="object" string="Done"
+                                            class="btn-success"  icon="fa-check"
+                                           attrs="{'invisible': [('state', 'in', ['done','cancel','pending','waiting','ready'])]}"/>
+                                    <button name="print_report" type="object" string="Print" icon="fa-print"
+                                            />
+
+                                </tree>
+                            </field>
+                        </page>
+                        <page name="Consumptions" string="Components">
+                            <field name="mrp_product_template_move_ids">
+                                <tree create="false" editable="bottom" delete="false">
+                                    <field name="product_id" readonly="1"/>
+
+                                    <field name="bom_product_template_attribute_value_ids" widget="many2many_tags" options="{'no_create': True}" readonly="1"/>
+
+                                    <field name="operation_id" readonly="1"/>
+                                    <field name="product_qty" readonly="1" string="Unit Quantity"/>
+                                    <field name="quantity_done" attrs="{'readonly':[('parent.state','=','done')]}"/>
+                                </tree>
+                            </field>
+
+                        </page>
+                        <page name="Productions" string="Productions">
+                            <field name="mrp_product_template_line_ids" readonly="1">
+                                <tree>
+                                    <field name="product_id"/>
+                                    <field name="quantity"/>
+                                </tree>
+                            </field>
+                            <separator string="Productions"/>
+                            <field name="production_ids">
+                                <tree>
+                                    <field name="name"/>
+                                    <field name="product_id"/>
+                                    <field name="product_qty"/>
+                                    <field name="state"/>
+                                </tree>
+                            </field>
+                        </page>
+                        <page name="Work Order Instructions" string="Work Order Instructions">
+                            <field name="mrp_template_workorder_note_ids" context="{'default_mrp_template_id': id}">
+                        <tree editable="bottom">
+                            <field name="sequence" widget="handle"/>
+                            <!-- <field name="workcenter_id" /> -->
+                            <field name="mrp_template_id" invisible="1"/>
+                            <field name="workorder_ids" widget="many2many_tags" invisible="1"/>
+                            <field name="workorder_id" domain="[('id','in',workorder_ids)]"/>
+                            <field name="name" string="Production Notes"/>
+                            <field name="image" widget="image" class="oe_avatar"/>
+
+                        </tree>
+                    </field>
+                        </page>
+                    </notebook>
+                </sheet>
+                <div class="oe_chatter">
+                    <field name="message_follower_ids" widget="mail_followers"/>
+                    <field name="message_ids" widget="mail_thread"/>
+                </div>
+            </form>
+        </field>
+    </record>
+
+    <record model="ir.ui.view" id="mrp_product_template_search_view">
+        <field name="model">mrp.product.template</field>
+        <field name="arch" type="xml">
+            <search>
+                <field name="product_tmpl_id"/>
+                <field name="partner_id"/>
+                <field name="sale_id"/>
+                <filter name="state" string="Draft" domain="[('state', '=', 'draft')]"/>
+                <filter name="state" string="Confirmed" domain="[('state', '=', 'confirmed')]"
+                       />
+                <filter name="state" string="Done" domain="[('state', '=', 'done')]" />
+                <filter name="state" string="Cancel" domain="[('state', '=', 'cancel')]"
+                        />
+                <filter name="state" string="State" context="{'group_by':'state'}"
+                        />
+                <filter name="partner_id" string="Partner" context="{'group_by':'partner_id'}"/>
+                <filter name="product_tmpl_id" string="Product" context="{'group_by':'product_tmpl_id'}"/>
+                <filter name="sale_id" string="Sale Order" context="{'group_by':'sale_id'}"/>
+                <filter name="commitment_date" string="Commitment Date" context="{'group_by':'commitment_date'}"/>
+            </search>
+        </field>
+    </record>
+
+    <record model="ir.ui.view" id="mrp_product_template_tree_view">
+        <field name="model">mrp.product.template</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="name" optional="show"/>
+                <field name="sale_id" optional="show"/>
+                <field name="commitment_date" optional="show"/>
+                <field name="partner_id" optional="show"/>
+                <field name="product_tmpl_id" optional="show"/>
+                <field name="quantity" optional="show"/>
+                <field name="done_qty" optional="show"/>
+                <field name="picking_type_id" optional="hide"/>
+                <field name="state" optional="show"/>
+
+            </tree>
+        </field>
+    </record>
+
+    <record model="ir.actions.act_window" id="mrp_product_template_act_window">
+        <field name="name">Mrp Product Template</field> <!-- TODO -->
+        <field name="res_model">mrp.product.template</field>
+        <field name="view_mode">tree,form</field>
+        <field name="domain">[]</field>
+        <field name="context">{}</field>
+    </record>
+
+    <record model="ir.ui.menu" id="mrp_product_template_menu">
+        <field name="name">Mrp Product Template</field>
+        <field name="parent_id" ref="mrp.menu_mrp_root"/> <!-- TODO -->
+        <field name="action" ref="mrp_product_template_act_window"/>
+        <field name="sequence" eval="12"/> <!-- TODO -->
+    </record>
+
+</odoo>

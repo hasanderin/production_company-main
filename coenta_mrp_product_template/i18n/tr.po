@@ -1,0 +1,870 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* coenta_mrp_product_template
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 15.0-20240109\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2025-05-26 08:04+0000\n"
+"PO-Revision-Date: 2025-05-26 12:07+0300\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"Language: tr_TR\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Generator: Poedit 3.6\n"
+
+#. module: coenta_mrp_product_template
+#: model:ir.actions.report,print_report_name:coenta_mrp_product_template.action_report_work_order
+msgid "'Work Order Label - %s' % (object.operation_id.name)"
+msgstr "'İş Emri Etiketi - %s' % (object.operation_id.name)"
+
+#. module: coenta_mrp_product_template
+#: model_terms:ir.ui.view,arch_db:coenta_mrp_product_template.report_work_order_document
+msgid ""
+"<b>Production Notes</b>\n"
+"                                        <br/>"
+msgstr ""
+"<b>Üretim Notları</b>\n"
+"                                        <br/>"
+
+#. module: coenta_mrp_product_template
+#: model_terms:ir.ui.view,arch_db:coenta_mrp_product_template.report_work_order_document
+msgid ""
+"<span style=\"font-weight:bold;font-size:32pt;text-transform: uppercase\">\n"
+"                                     FÖYÜ</span>"
+msgstr ""
+"<span style=\"font-weight:bold;font-size:32pt;text-transform: uppercase\">\n"
+"                                     FÖYÜ</span>"
+
+#. module: coenta_mrp_product_template
+#: model_terms:ir.ui.view,arch_db:coenta_mrp_product_template.report_mrp_product_teplate_document
+msgid "<u style=\"font-weight:bold;font-size:14pt;\">Components</u>"
+msgstr "<u style=\"font-weight:bold;font-size:14pt;\">Bileşenler</u>"
+
+#. module: coenta_mrp_product_template
+#: model_terms:ir.ui.view,arch_db:coenta_mrp_product_template.report_mrp_product_teplate_document
+msgid "<u style=\"font-weight:bold;font-size:14pt;\">Sale Production Notes</u>"
+msgstr "<u style=\"font-weight:bold;font-size:14pt;\">Satış Üretim Notları</u>"
+
+#. module: coenta_mrp_product_template
+#: model:ir.model.fields,field_description:coenta_mrp_product_template.field_mrp_product_template__message_needaction
+msgid "Action Needed"
+msgstr "Aksiyon Gerekli"
+
+#. module: coenta_mrp_product_template
+#: model:ir.model.fields,field_description:coenta_mrp_product_template.field_mrp_product_template__activity_ids
+msgid "Activities"
+msgstr "Aktiviteler"
+
+#. module: coenta_mrp_product_template
+#: model:ir.model.fields,field_description:coenta_mrp_product_template.field_mrp_product_template__activity_exception_decoration
+msgid "Activity Exception Decoration"
+msgstr "Activity Exception Decoration"
+
+#. module: coenta_mrp_product_template
+#: model:ir.model.fields,field_description:coenta_mrp_product_template.field_mrp_product_template__activity_state
+msgid "Activity State"
+msgstr "Activity State"
+
+#. module: coenta_mrp_product_template
+#: model:ir.model.fields,field_description:coenta_mrp_product_template.field_mrp_product_template__activity_type_icon
+msgid "Activity Type Icon"
+msgstr "Activity Type Icon"
+
+#. module: coenta_mrp_product_template
+#: model_terms:ir.ui.view,arch_db:coenta_mrp_product_template.report_work_order_document
+msgid "Adetler"
+msgstr "Adetler"
+
+#. module: coenta_mrp_product_template
+#: model_terms:ir.ui.view,arch_db:coenta_mrp_product_template.report_mrp_product_teplate_document
+msgid "Apply On Variants"
+msgstr "Varyantlara Uygula"
+
+#. module: coenta_mrp_product_template
+#: model:ir.model.fields,field_description:coenta_mrp_product_template.field_mrp_product_template_move__bom_product_template_attribute_value_ids
+msgid "Apply on Variants"
+msgstr "Varyantlara Uygula"
+
+#. module: coenta_mrp_product_template
+#: model:ir.model.fields,field_description:coenta_mrp_product_template.field_mrp_product_template__message_attachment_count
+msgid "Attachment Count"
+msgstr "Ek Sayısı"
+
+#. module: coenta_mrp_product_template
+#: model:ir.model.fields,help:coenta_mrp_product_template.field_mrp_product_template_move__bom_product_template_attribute_value_ids
+msgid "BOM Product Variants needed to apply this line."
+msgstr "Bu satıra uygulanacak varyantlar"
+
+#. module: coenta_mrp_product_template
+#: model:ir.model.fields,field_description:coenta_mrp_product_template.field_mrp_product_template__bom_id
+msgid "Bom"
+msgstr "Reçete"
+
+#. module: coenta_mrp_product_template
+#: model_terms:ir.ui.view,arch_db:coenta_mrp_product_template.mrp_product_template_search_view
+msgid "Cancel"
+msgstr "İptal"
+
+#. module: coenta_mrp_product_template
+#: model_terms:ir.ui.view,arch_db:coenta_mrp_product_template.mrp_product_template_form_view
+msgid "Cancel Productions"
+msgstr "Üretim Emirlerini İptal Et"
+
+#. module: coenta_mrp_product_template
+#: model:ir.model.fields.selection,name:coenta_mrp_product_template.selection__mrp_product_template__state__cancel
+#: model:ir.model.fields.selection,name:coenta_mrp_product_template.selection__mrp_template_workorder__state__cancel
+msgid "Cancelled"
+msgstr "İptal Edildi"
+
+#. module: coenta_mrp_product_template
+#: model:ir.model.fields,field_description:coenta_mrp_product_template.field_product_product__product_color_attribute_id
+msgid "Color Attribute"
+msgstr "Renk Varyantı"
+
+#. module: coenta_mrp_product_template
+#: model:ir.model.fields,field_description:coenta_mrp_product_template.field_mrp_product_template__commitment_date
+#: model_terms:ir.ui.view,arch_db:coenta_mrp_product_template.mrp_product_template_search_view
+#: model_terms:ir.ui.view,arch_db:coenta_mrp_product_template.report_mrp_product_teplate_document
+msgid "Commitment Date"
+msgstr "Planlanan Teslim Tarihi"
+
+#. module: coenta_mrp_product_template
+#: model_terms:ir.ui.view,arch_db:coenta_mrp_product_template.mrp_product_template_form_view
+msgid "Components"
+msgstr "Bileşenler"
+
+#. module: coenta_mrp_product_template
+#: model:ir.model.fields.selection,name:coenta_mrp_product_template.selection__mrp_product_template__state__confirmed
+#: model_terms:ir.ui.view,arch_db:coenta_mrp_product_template.mrp_product_template_search_view
+msgid "Confirmed"
+msgstr "Onaylandı"
+
+#. module: coenta_mrp_product_template
+#: model_terms:ir.ui.view,arch_db:coenta_mrp_product_template.sale_order_form_view
+msgid "Create MRP Product Template"
+msgstr "Model Üretim Emri Oluştur"
+
+#. module: coenta_mrp_product_template
+#: model_terms:ir.ui.view,arch_db:coenta_mrp_product_template.mrp_product_template_form_view
+msgid "Create Productions"
+msgstr "Üretim Emirlerini Yarat"
+
+#. module: coenta_mrp_product_template
+#: model:ir.model.fields,field_description:coenta_mrp_product_template.field_mrp_product_template__create_uid
+#: model:ir.model.fields,field_description:coenta_mrp_product_template.field_mrp_product_template_line__create_uid
+#: model:ir.model.fields,field_description:coenta_mrp_product_template.field_mrp_product_template_move__create_uid
+#: model:ir.model.fields,field_description:coenta_mrp_product_template.field_mrp_template_workorder__create_uid
+#: model:ir.model.fields,field_description:coenta_mrp_product_template.field_mrp_template_workorder_note__create_uid
+#: model:ir.model.fields,field_description:coenta_mrp_product_template.field_sale_production_note__create_uid
+msgid "Created by"
+msgstr "Oluşturan"
+
+#. module: coenta_mrp_product_template
+#: model:ir.model.fields,field_description:coenta_mrp_product_template.field_mrp_product_template__create_date
+#: model:ir.model.fields,field_description:coenta_mrp_product_template.field_mrp_product_template_line__create_date
+#: model:ir.model.fields,field_description:coenta_mrp_product_template.field_mrp_product_template_move__create_date
+#: model:ir.model.fields,field_description:coenta_mrp_product_template.field_mrp_template_workorder__create_date
+#: model:ir.model.fields,field_description:coenta_mrp_product_template.field_mrp_template_workorder_note__create_date
+#: model:ir.model.fields,field_description:coenta_mrp_product_template.field_sale_production_note__create_date
+msgid "Created on"
+msgstr "Oluşturulma Tarihi"
+
+#. module: coenta_mrp_product_template
+#: model:ir.model.fields,field_description:coenta_mrp_product_template.field_mrp_product_template__partner_id
+msgid "Customer"
+msgstr "Müşteri"
+
+#. module: coenta_mrp_product_template
+#: model:ir.model.fields,field_description:coenta_mrp_product_template.field_mrp_product_template__display_name
+#: model:ir.model.fields,field_description:coenta_mrp_product_template.field_mrp_product_template_line__display_name
+#: model:ir.model.fields,field_description:coenta_mrp_product_template.field_mrp_product_template_move__display_name
+#: model:ir.model.fields,field_description:coenta_mrp_product_template.field_mrp_template_workorder__display_name
+#: model:ir.model.fields,field_description:coenta_mrp_product_template.field_mrp_template_workorder_note__display_name
+#: model:ir.model.fields,field_description:coenta_mrp_product_template.field_sale_production_note__display_name
+msgid "Display Name"
+msgstr "Görünüm Adı"
+
+#. module: coenta_mrp_product_template
+#: model:ir.model.fields,field_description:coenta_mrp_product_template.field_sale_order__domain_product_template_ids
+#: model:ir.model.fields,field_description:coenta_mrp_product_template.field_sale_production_note__domain_product_template_ids
+msgid "Domain Product Template"
+msgstr "Domain Product Template"
+
+#. module: coenta_mrp_product_template
+#: model:ir.model.fields.selection,name:coenta_mrp_product_template.selection__mrp_product_template__state__done
+#: model:ir.model.fields.selection,name:coenta_mrp_product_template.selection__mrp_template_workorder__state__done
+#: model_terms:ir.ui.view,arch_db:coenta_mrp_product_template.mrp_product_template_form_view
+#: model_terms:ir.ui.view,arch_db:coenta_mrp_product_template.mrp_product_template_search_view
+#: model_terms:ir.ui.view,arch_db:coenta_mrp_product_template.mrp_template_workorder_tree_view
+msgid "Done"
+msgstr "Yapıldı"
+
+#. module: coenta_mrp_product_template
+#: model:ir.model.fields,field_description:coenta_mrp_product_template.field_mrp_product_template__done_qty
+msgid "Done Quantity"
+msgstr "Üretilen Miktar"
+
+#. module: coenta_mrp_product_template
+#: model:ir.model.fields.selection,name:coenta_mrp_product_template.selection__mrp_product_template__state__draft
+#: model_terms:ir.ui.view,arch_db:coenta_mrp_product_template.mrp_product_template_search_view
+msgid "Draft"
+msgstr "Taslak"
+
+#. module: coenta_mrp_product_template
+#: model:ir.model.fields,field_description:coenta_mrp_product_template.field_mrp_product_template__failed_message_ids
+msgid "Failed Messages"
+msgstr "Failed Messages"
+
+#. module: coenta_mrp_product_template
+#: model:ir.model.fields,field_description:coenta_mrp_product_template.field_mrp_product_template__message_follower_ids
+msgid "Followers"
+msgstr "Followers"
+
+#. module: coenta_mrp_product_template
+#: model:ir.model.fields,field_description:coenta_mrp_product_template.field_mrp_product_template__message_partner_ids
+msgid "Followers (Partners)"
+msgstr "Followers (Partners)"
+
+#. module: coenta_mrp_product_template
+#: model:ir.model.fields,help:coenta_mrp_product_template.field_mrp_product_template__activity_type_icon
+msgid "Font awesome icon e.g. fa-tasks"
+msgstr "Font awesome icon e.g. fa-tasks"
+
+#. module: coenta_mrp_product_template
+#: model:ir.model.fields,field_description:coenta_mrp_product_template.field_mrp_product_template__has_message
+msgid "Has Message"
+msgstr "Has Message"
+
+#. module: coenta_mrp_product_template
+#: model:ir.model.fields,field_description:coenta_mrp_product_template.field_mrp_product_template__id
+#: model:ir.model.fields,field_description:coenta_mrp_product_template.field_mrp_product_template_line__id
+#: model:ir.model.fields,field_description:coenta_mrp_product_template.field_mrp_product_template_move__id
+#: model:ir.model.fields,field_description:coenta_mrp_product_template.field_mrp_template_workorder__id
+#: model:ir.model.fields,field_description:coenta_mrp_product_template.field_mrp_template_workorder_note__id
+#: model:ir.model.fields,field_description:coenta_mrp_product_template.field_sale_production_note__id
+msgid "ID"
+msgstr "ID"
+
+#. module: coenta_mrp_product_template
+#: model:ir.model.fields,field_description:coenta_mrp_product_template.field_mrp_product_template__activity_exception_icon
+msgid "Icon"
+msgstr "Icon"
+
+#. module: coenta_mrp_product_template
+#: model:ir.model.fields,help:coenta_mrp_product_template.field_mrp_product_template__activity_exception_icon
+msgid "Icon to indicate an exception activity."
+msgstr "Icon to indicate an exception activity."
+
+#. module: coenta_mrp_product_template
+#: model:ir.model.fields,help:coenta_mrp_product_template.field_mrp_product_template__message_needaction
+#: model:ir.model.fields,help:coenta_mrp_product_template.field_mrp_product_template__message_unread
+msgid "If checked, new messages require your attention."
+msgstr "If checked, new messages require your attention."
+
+#. module: coenta_mrp_product_template
+#: model:ir.model.fields,help:coenta_mrp_product_template.field_mrp_product_template__message_has_error
+#: model:ir.model.fields,help:coenta_mrp_product_template.field_mrp_product_template__message_has_sms_error
+msgid "If checked, some messages have a delivery error."
+msgstr "If checked, some messages have a delivery error."
+
+#. module: coenta_mrp_product_template
+#: model:ir.model.fields,field_description:coenta_mrp_product_template.field_mrp_template_workorder__image
+#: model:ir.model.fields,field_description:coenta_mrp_product_template.field_mrp_template_workorder_note__image
+#: model:ir.model.fields,field_description:coenta_mrp_product_template.field_sale_production_note__image
+msgid "Image"
+msgstr "Görsel"
+
+#. module: coenta_mrp_product_template
+#: model:ir.model.fields.selection,name:coenta_mrp_product_template.selection__mrp_template_workorder__state__in_progress
+msgid "In Progress"
+msgstr "İşlemde"
+
+#. module: coenta_mrp_product_template
+#: model:ir.model.fields,field_description:coenta_mrp_product_template.field_product_attribute__is_color
+msgid "Is Color"
+msgstr "Renk Mi?"
+
+#. module: coenta_mrp_product_template
+#: model:ir.model.fields,field_description:coenta_mrp_product_template.field_mrp_product_template__message_is_follower
+msgid "Is Follower"
+msgstr "Is Follower"
+
+#. module: coenta_mrp_product_template
+#: model:ir.model.fields,field_description:coenta_mrp_product_template.field_product_attribute__is_size
+msgid "Is Size"
+msgstr "Beden Mi?"
+
+#. module: coenta_mrp_product_template
+#: model:ir.model.fields,field_description:coenta_mrp_product_template.field_mrp_product_template____last_update
+#: model:ir.model.fields,field_description:coenta_mrp_product_template.field_mrp_product_template_line____last_update
+#: model:ir.model.fields,field_description:coenta_mrp_product_template.field_mrp_product_template_move____last_update
+#: model:ir.model.fields,field_description:coenta_mrp_product_template.field_mrp_template_workorder____last_update
+#: model:ir.model.fields,field_description:coenta_mrp_product_template.field_mrp_template_workorder_note____last_update
+#: model:ir.model.fields,field_description:coenta_mrp_product_template.field_sale_production_note____last_update
+msgid "Last Modified on"
+msgstr "Son Değiştirilme Tarihi"
+
+#. module: coenta_mrp_product_template
+#: model:ir.model.fields,field_description:coenta_mrp_product_template.field_mrp_product_template__write_uid
+#: model:ir.model.fields,field_description:coenta_mrp_product_template.field_mrp_product_template_line__write_uid
+#: model:ir.model.fields,field_description:coenta_mrp_product_template.field_mrp_product_template_move__write_uid
+#: model:ir.model.fields,field_description:coenta_mrp_product_template.field_mrp_template_workorder__write_uid
+#: model:ir.model.fields,field_description:coenta_mrp_product_template.field_mrp_template_workorder_note__write_uid
+#: model:ir.model.fields,field_description:coenta_mrp_product_template.field_sale_production_note__write_uid
+msgid "Last Updated by"
+msgstr "Son Güncelleyen"
+
+#. module: coenta_mrp_product_template
+#: model:ir.model.fields,field_description:coenta_mrp_product_template.field_mrp_product_template__write_date
+#: model:ir.model.fields,field_description:coenta_mrp_product_template.field_mrp_product_template_line__write_date
+#: model:ir.model.fields,field_description:coenta_mrp_product_template.field_mrp_product_template_move__write_date
+#: model:ir.model.fields,field_description:coenta_mrp_product_template.field_mrp_template_workorder__write_date
+#: model:ir.model.fields,field_description:coenta_mrp_product_template.field_mrp_template_workorder_note__write_date
+#: model:ir.model.fields,field_description:coenta_mrp_product_template.field_sale_production_note__write_date
+msgid "Last Updated on"
+msgstr "Son Güncelleme Tarihi"
+
+#. module: coenta_mrp_product_template
+#: model_terms:ir.ui.view,arch_db:coenta_mrp_product_template.report_mrp_product_teplate_document
+#: model_terms:ir.ui.view,arch_db:coenta_mrp_product_template.report_work_order_document
+msgid "Logo"
+msgstr "Logo"
+
+#. module: coenta_mrp_product_template
+#: model_terms:ir.ui.view,arch_db:coenta_mrp_product_template.sale_order_form_view
+msgid "MRP Product Template"
+msgstr "Model Üretim Emri"
+
+#. module: coenta_mrp_product_template
+#: model:ir.model.fields,field_description:coenta_mrp_product_template.field_mrp_product_template__message_main_attachment_id
+msgid "Main Attachment"
+msgstr "Main Attachment"
+
+#. module: coenta_mrp_product_template
+#: model_terms:ir.ui.view,arch_db:coenta_mrp_product_template.report_work_order_document
+msgid "Manufacture Order"
+msgstr "Üretim Emri"
+
+#. module: coenta_mrp_product_template
+#: model_terms:ir.ui.view,arch_db:coenta_mrp_product_template.mrp_product_template_form_view
+msgid "Mark Done"
+msgstr "Biten Olarak İşaretle"
+
+#. module: coenta_mrp_product_template
+#: model:ir.model.fields,field_description:coenta_mrp_product_template.field_mrp_product_template__message_has_error
+msgid "Message Delivery error"
+msgstr "Message Delivery error"
+
+#. module: coenta_mrp_product_template
+#: model:ir.model.fields,field_description:coenta_mrp_product_template.field_mrp_product_template__message_ids
+msgid "Messages"
+msgstr "Messages"
+
+#. module: coenta_mrp_product_template
+#: model:ir.actions.act_window,name:coenta_mrp_product_template.mrp_product_template_act_window
+#: model:ir.model,name:coenta_mrp_product_template.model_mrp_product_template
+#: model:ir.ui.menu,name:coenta_mrp_product_template.mrp_product_template_menu
+msgid "Mrp Product Template"
+msgstr "Model Üretim Emri"
+
+#. module: coenta_mrp_product_template
+#: model:ir.model,name:coenta_mrp_product_template.model_mrp_product_template_line
+msgid "Mrp Product Template Line"
+msgstr "Model Üretim Emri Satırı"
+
+#. module: coenta_mrp_product_template
+#: model:ir.model,name:coenta_mrp_product_template.model_mrp_product_template_move
+msgid "Mrp Product Template Move"
+msgstr "Model Üretim Emri Hareketi"
+
+#. module: coenta_mrp_product_template
+#: model:ir.model,name:coenta_mrp_product_template.model_mrp_template_workorder
+msgid "Mrp Template Workorder"
+msgstr "Model İş Emri"
+
+#. module: coenta_mrp_product_template
+#: model:ir.model,name:coenta_mrp_product_template.model_mrp_template_workorder_note
+msgid "Mrp Template Workorder Note"
+msgstr "Model İş Emri Notu"
+
+#. module: coenta_mrp_product_template
+#: model:ir.model.fields,field_description:coenta_mrp_product_template.field_mrp_product_template__my_activity_date_deadline
+msgid "My Activity Deadline"
+msgstr "My Activity Deadline"
+
+#. module: coenta_mrp_product_template
+#: model_terms:ir.ui.view,arch_db:coenta_mrp_product_template.report_work_order_document
+msgid "NA"
+msgstr "Uygulanabilir Değil"
+
+#. module: coenta_mrp_product_template
+#: model:ir.model.fields,field_description:coenta_mrp_product_template.field_mrp_product_template__name
+msgid "Name"
+msgstr "Adı"
+
+#. module: coenta_mrp_product_template
+#: code:addons/coenta_mrp_product_template/models/mrp_product_template.py:0
+#, python-format
+msgid "New"
+msgstr "Yeni"
+
+#. module: coenta_mrp_product_template
+#: model:ir.model.fields,field_description:coenta_mrp_product_template.field_mrp_product_template__activity_calendar_event_id
+msgid "Next Activity Calendar Event"
+msgstr "Next Activity Calendar Event"
+
+#. module: coenta_mrp_product_template
+#: model:ir.model.fields,field_description:coenta_mrp_product_template.field_mrp_product_template__activity_date_deadline
+msgid "Next Activity Deadline"
+msgstr "Next Activity Deadline"
+
+#. module: coenta_mrp_product_template
+#: model:ir.model.fields,field_description:coenta_mrp_product_template.field_mrp_product_template__activity_summary
+msgid "Next Activity Summary"
+msgstr "Next Activity Summary"
+
+#. module: coenta_mrp_product_template
+#: model:ir.model.fields,field_description:coenta_mrp_product_template.field_mrp_product_template__activity_type_id
+msgid "Next Activity Type"
+msgstr "Next Activity Type"
+
+#. module: coenta_mrp_product_template
+#: code:addons/coenta_mrp_product_template/models/mrp_template_workorder.py:0
+#, python-format
+msgid "No work orders to end."
+msgstr "No work orders to end."
+
+#. module: coenta_mrp_product_template
+#: code:addons/coenta_mrp_product_template/models/mrp_template_workorder.py:0
+#, python-format
+msgid "No work orders to finish."
+msgstr "No work orders to finish."
+
+#. module: coenta_mrp_product_template
+#: code:addons/coenta_mrp_product_template/models/mrp_template_workorder.py:0
+#, python-format
+msgid "No work orders to start."
+msgstr "No work orders to start."
+
+#. module: coenta_mrp_product_template
+#: model:ir.model.fields,field_description:coenta_mrp_product_template.field_mrp_product_template__message_needaction_counter
+msgid "Number of Actions"
+msgstr "Number of Actions"
+
+#. module: coenta_mrp_product_template
+#: model:ir.model.fields,field_description:coenta_mrp_product_template.field_mrp_product_template__message_has_error_counter
+msgid "Number of errors"
+msgstr "Number of errors"
+
+#. module: coenta_mrp_product_template
+#: model:ir.model.fields,help:coenta_mrp_product_template.field_mrp_product_template__message_needaction_counter
+msgid "Number of messages which requires an action"
+msgstr "Number of messages which requires an action"
+
+#. module: coenta_mrp_product_template
+#: model:ir.model.fields,help:coenta_mrp_product_template.field_mrp_product_template__message_has_error_counter
+msgid "Number of messages with delivery error"
+msgstr "Number of messages with delivery error"
+
+#. module: coenta_mrp_product_template
+#: model:ir.model.fields,help:coenta_mrp_product_template.field_mrp_product_template__message_unread_counter
+msgid "Number of unread messages"
+msgstr "Number of unread messages"
+
+#. module: coenta_mrp_product_template
+#: model:ir.model.fields,field_description:coenta_mrp_product_template.field_mrp_product_template_move__operation_id
+#: model_terms:ir.ui.view,arch_db:coenta_mrp_product_template.report_mrp_product_teplate_document
+msgid "Operation"
+msgstr "Operasyon"
+
+#. module: coenta_mrp_product_template
+#: model:ir.model.fields,field_description:coenta_mrp_product_template.field_mrp_product_template__picking_type_id
+msgid "Operation Type"
+msgstr "Operasyon Türü"
+
+#. module: coenta_mrp_product_template
+#: model_terms:ir.ui.view,arch_db:coenta_mrp_product_template.mrp_product_template_search_view
+#: model_terms:ir.ui.view,arch_db:coenta_mrp_product_template.report_mrp_product_teplate_document
+msgid "Partner"
+msgstr "Müşteri"
+
+#. module: coenta_mrp_product_template
+#: model_terms:ir.ui.view,arch_db:coenta_mrp_product_template.mrp_product_template_form_view
+#: model_terms:ir.ui.view,arch_db:coenta_mrp_product_template.mrp_template_workorder_tree_view
+msgid "Pause"
+msgstr "Duraklat"
+
+#. module: coenta_mrp_product_template
+#: model:ir.model.fields.selection,name:coenta_mrp_product_template.selection__mrp_template_workorder__state__pending
+msgid "Pending"
+msgstr "Beklemede"
+
+#. module: coenta_mrp_product_template
+#: model:ir.model.fields,field_description:coenta_mrp_product_template.field_mrp_template_workorder__planned_end_date
+#: model_terms:ir.ui.view,arch_db:coenta_mrp_product_template.report_work_order_document
+msgid "Planned End Date"
+msgstr "Planlanan Bitiş Tarihi"
+
+#. module: coenta_mrp_product_template
+#: model:ir.model.fields,field_description:coenta_mrp_product_template.field_mrp_product_template__date_planned_start
+#: model:ir.model.fields,field_description:coenta_mrp_product_template.field_mrp_template_workorder__planned_start_date
+#: model_terms:ir.ui.view,arch_db:coenta_mrp_product_template.report_mrp_product_teplate_document
+#: model_terms:ir.ui.view,arch_db:coenta_mrp_product_template.report_work_order_document
+msgid "Planned Start Date"
+msgstr "Planlanan Başlangıç Tarihi"
+
+#. module: coenta_mrp_product_template
+#: model_terms:ir.ui.view,arch_db:coenta_mrp_product_template.mrp_product_template_form_view
+#: model_terms:ir.ui.view,arch_db:coenta_mrp_product_template.mrp_template_workorder_tree_view
+msgid "Print"
+msgstr "Yazdır"
+
+#. module: coenta_mrp_product_template
+#: model:ir.model,name:coenta_mrp_product_template.model_product_product
+#: model:ir.model.fields,field_description:coenta_mrp_product_template.field_mrp_product_template_line__product_id
+#: model:ir.model.fields,field_description:coenta_mrp_product_template.field_mrp_product_template_move__product_id
+#: model_terms:ir.ui.view,arch_db:coenta_mrp_product_template.mrp_product_template_search_view
+#: model_terms:ir.ui.view,arch_db:coenta_mrp_product_template.report_mrp_product_teplate_document
+#: model_terms:ir.ui.view,arch_db:coenta_mrp_product_template.report_work_order_document
+msgid "Product"
+msgstr "Ürün"
+
+#. module: coenta_mrp_product_template
+#: model:ir.model,name:coenta_mrp_product_template.model_product_attribute
+msgid "Product Attribute"
+msgstr "Ürün Niteliği"
+
+#. module: coenta_mrp_product_template
+#: model:ir.model.fields,field_description:coenta_mrp_product_template.field_stock_move__coenta_product_move_id
+msgid "Product Move"
+msgstr "Ürün Hareketi"
+
+#. module: coenta_mrp_product_template
+#: model:ir.model.fields,field_description:coenta_mrp_product_template.field_mrp_product_template_move__product_qty
+msgid "Product Quantity"
+msgstr "Ürün Miktarı"
+
+#. module: coenta_mrp_product_template
+#: model:ir.model.fields,field_description:coenta_mrp_product_template.field_mrp_product_template__product_tmpl_id
+#: model:ir.model.fields,field_description:coenta_mrp_product_template.field_mrp_product_template_line__mrp_product_template_id
+#: model:ir.model.fields,field_description:coenta_mrp_product_template.field_mrp_product_template_move__mrp_product_template_id
+#: model:ir.model.fields,field_description:coenta_mrp_product_template.field_mrp_production__coenta_product_template_id
+#: model:ir.model.fields,field_description:coenta_mrp_product_template.field_mrp_template_workorder_note__mrp_template_id
+#: model:ir.model.fields,field_description:coenta_mrp_product_template.field_sale_production_note__product_template_id
+#: model_terms:ir.ui.view,arch_db:coenta_mrp_product_template.mrp_production_search_view
+msgid "Product Template"
+msgstr "Model"
+
+#. module: coenta_mrp_product_template
+#: model:ir.model.fields,field_description:coenta_mrp_product_template.field_mrp_product_template__mrp_product_template_line_ids
+msgid "Product Template Lines"
+msgstr "Model Satırları"
+
+#. module: coenta_mrp_product_template
+#: model:ir.model.fields,field_description:coenta_mrp_product_template.field_mrp_product_template__mrp_product_template_move_ids
+msgid "Product Template Moves"
+msgstr "Model Hareketleri"
+
+#. module: coenta_mrp_product_template
+#: model:ir.model.fields,field_description:coenta_mrp_product_template.field_mrp_product_template_move__product_uom_id
+msgid "Product UoM"
+msgstr "Adet"
+
+#. module: coenta_mrp_product_template
+#: model:ir.model.fields,field_description:coenta_mrp_product_template.field_mrp_template_workorder__production_id
+msgid "Production"
+msgstr "Üretim"
+
+#. module: coenta_mrp_product_template
+#: model_terms:ir.ui.view,arch_db:coenta_mrp_product_template.report_mrp_product_teplate_document
+msgid "Production Code"
+msgstr "Üretim Kodu"
+
+#. module: coenta_mrp_product_template
+#: model:ir.model.fields,field_description:coenta_mrp_product_template.field_mrp_template_workorder_note__name
+#: model:ir.model.fields,field_description:coenta_mrp_product_template.field_sale_production_note__name
+msgid "Production Note"
+msgstr "Üretim Notu"
+
+#. module: coenta_mrp_product_template
+#: model:ir.model.fields,field_description:coenta_mrp_product_template.field_mrp_template_workorder__name
+#: model:ir.model.fields,field_description:coenta_mrp_product_template.field_sale_order__sale_production_note_ids
+#: model_terms:ir.ui.view,arch_db:coenta_mrp_product_template.mrp_product_template_form_view
+#: model_terms:ir.ui.view,arch_db:coenta_mrp_product_template.mrp_template_workorder_tree_view
+#: model_terms:ir.ui.view,arch_db:coenta_mrp_product_template.sale_order_form_view
+msgid "Production Notes"
+msgstr "Üretim Notları"
+
+#. module: coenta_mrp_product_template
+#: model:ir.model,name:coenta_mrp_product_template.model_mrp_production
+msgid "Production Order"
+msgstr "Üretim Emri"
+
+#. module: coenta_mrp_product_template
+#: code:addons/coenta_mrp_product_template/models/mrp_product_template.py:0
+#, python-format
+msgid "Production Orders are not completed yet"
+msgstr "Üretim Emirleri henüz tamamlanmadı"
+
+#. module: coenta_mrp_product_template
+#: model:ir.model.fields,field_description:coenta_mrp_product_template.field_mrp_template_workorder__production_state
+msgid "Production State"
+msgstr "Durum"
+
+#. module: coenta_mrp_product_template
+#: model:ir.model.fields,field_description:coenta_mrp_product_template.field_sale_order__mrp_product_template_ids
+msgid "Production Templates"
+msgstr "Model Üretim Emirleri"
+
+#. module: coenta_mrp_product_template
+#: model:ir.model.fields,field_description:coenta_mrp_product_template.field_mrp_product_template__production_ids
+#: model_terms:ir.ui.view,arch_db:coenta_mrp_product_template.mrp_product_template_form_view
+msgid "Productions"
+msgstr "Üretimler"
+
+#. module: coenta_mrp_product_template
+#: model:ir.model.fields,field_description:coenta_mrp_product_template.field_mrp_product_template_line__quantity
+msgid "Quantity"
+msgstr "Miktar"
+
+#. module: coenta_mrp_product_template
+#: model:ir.model.fields,field_description:coenta_mrp_product_template.field_mrp_product_template_move__quantity_done
+msgid "Quantity Done"
+msgstr "Biten Miktar"
+
+#. module: coenta_mrp_product_template
+#: model:ir.model.fields.selection,name:coenta_mrp_product_template.selection__mrp_template_workorder__state__ready
+msgid "Ready"
+msgstr "Hazır"
+
+#. module: coenta_mrp_product_template
+#: model:ir.model.fields,field_description:coenta_mrp_product_template.field_mrp_template_workorder__duration
+msgid "Real Duration"
+msgstr "Gerçekleşen Zaman"
+
+#. module: coenta_mrp_product_template
+#: model_terms:ir.ui.view,arch_db:coenta_mrp_product_template.report_work_order_document
+msgid "Renk:"
+msgstr "Renk:"
+
+#. module: coenta_mrp_product_template
+#: model:ir.model.fields,field_description:coenta_mrp_product_template.field_mrp_product_template__activity_user_id
+msgid "Responsible User"
+msgstr "Sorumlu Kullanıcı"
+
+#. module: coenta_mrp_product_template
+#: model:ir.model.fields,field_description:coenta_mrp_product_template.field_mrp_product_template__message_has_sms_error
+msgid "SMS Delivery error"
+msgstr "SMS Delivery error"
+
+#. module: coenta_mrp_product_template
+#: model:ir.model.fields,field_description:coenta_mrp_product_template.field_mrp_product_template__sale_id
+#: model_terms:ir.ui.view,arch_db:coenta_mrp_product_template.mrp_product_template_form_view
+#: model_terms:ir.ui.view,arch_db:coenta_mrp_product_template.report_mrp_product_teplate_document
+msgid "Sale"
+msgstr "Satış"
+
+#. module: coenta_mrp_product_template
+#: code:addons/coenta_mrp_product_template/models/mrp_product_template.py:0
+#: model:ir.model.fields,field_description:coenta_mrp_product_template.field_sale_production_note__sale_id
+#: model_terms:ir.ui.view,arch_db:coenta_mrp_product_template.mrp_product_template_search_view
+#, python-format
+msgid "Sale Order"
+msgstr "Satış Siparişi"
+
+#. module: coenta_mrp_product_template
+#: model:ir.model,name:coenta_mrp_product_template.model_sale_production_note
+msgid "Sale Production Note"
+msgstr "Satış Üretim Notu"
+
+#. module: coenta_mrp_product_template
+#: model:ir.model,name:coenta_mrp_product_template.model_sale_order
+msgid "Sales Order"
+msgstr "Satış Siparişi"
+
+#. module: coenta_mrp_product_template
+#: model:ir.model.fields,field_description:coenta_mrp_product_template.field_mrp_template_workorder_note__sequence
+#: model:ir.model.fields,field_description:coenta_mrp_product_template.field_sale_production_note__sequence
+msgid "Sequence"
+msgstr "Sıralama"
+
+#. module: coenta_mrp_product_template
+#: model:ir.model.fields,field_description:coenta_mrp_product_template.field_product_product__product_size_attribute_id
+msgid "Size Attribute"
+msgstr "Beden Varyantı"
+
+#. module: coenta_mrp_product_template
+#: model_terms:ir.ui.view,arch_db:coenta_mrp_product_template.mrp_product_template_form_view
+#: model_terms:ir.ui.view,arch_db:coenta_mrp_product_template.mrp_template_workorder_tree_view
+msgid "Start"
+msgstr "Başlat"
+
+#. module: coenta_mrp_product_template
+#: model_terms:ir.ui.view,arch_db:coenta_mrp_product_template.mrp_product_template_search_view
+msgid "State"
+msgstr "Durum"
+
+#. module: coenta_mrp_product_template
+#: model:ir.model.fields,field_description:coenta_mrp_product_template.field_mrp_product_template__state
+#: model:ir.model.fields,field_description:coenta_mrp_product_template.field_mrp_template_workorder__state
+msgid "Status"
+msgstr "Durum"
+
+#. module: coenta_mrp_product_template
+#: model:ir.model.fields,help:coenta_mrp_product_template.field_mrp_product_template__activity_state
+msgid ""
+"Status based on activities\n"
+"Overdue: Due date is already passed\n"
+"Today: Activity date is today\n"
+"Planned: Future activities."
+msgstr ""
+"Status based on activities\n"
+"Overdue: Due date is already passed\n"
+"Today: Activity date is today\n"
+"Planned: Future activities."
+
+#. module: coenta_mrp_product_template
+#: model:ir.model,name:coenta_mrp_product_template.model_stock_move
+msgid "Stock Move"
+msgstr "Stok Hareketi"
+
+#. module: coenta_mrp_product_template
+#: model:ir.model.fields,field_description:coenta_mrp_product_template.field_mrp_template_workorder__mrp_template_id
+msgid "Template"
+msgstr "Şablon"
+
+#. module: coenta_mrp_product_template
+#: model:ir.actions.report,name:coenta_mrp_product_template.action_report_work_order_2
+msgid "Template Work Order Label"
+msgstr "Şablon İş Emri Etiketi"
+
+#. module: coenta_mrp_product_template
+#: model:ir.model.fields,help:coenta_mrp_product_template.field_mrp_product_template__commitment_date
+msgid ""
+"This is the delivery date promised to the customer. If set, the delivery "
+"order will be scheduled based on this date rather than product lead times."
+msgstr ""
+"This is the delivery date promised to the customer. If set, the delivery "
+"order will be scheduled based on this date rather than product lead times."
+
+#. module: coenta_mrp_product_template
+#: model_terms:ir.ui.view,arch_db:coenta_mrp_product_template.report_mrp_product_teplate_document
+#: model_terms:ir.ui.view,arch_db:coenta_mrp_product_template.report_work_order_document
+msgid "Total"
+msgstr "Toplam"
+
+#. module: coenta_mrp_product_template
+#: model_terms:ir.ui.view,arch_db:coenta_mrp_product_template.report_mrp_product_teplate_document
+msgid "Total Matarial QTY"
+msgstr "Toplam Malzeme Miktarı"
+
+#. module: coenta_mrp_product_template
+#: model:ir.model.fields,field_description:coenta_mrp_product_template.field_mrp_product_template__quantity
+msgid "Total Quantity"
+msgstr "Toplam Miktar"
+
+#. module: coenta_mrp_product_template
+#: model:ir.model.fields,help:coenta_mrp_product_template.field_mrp_product_template__activity_exception_decoration
+msgid "Type of the exception activity on record."
+msgstr "Type of the exception activity on record."
+
+#. module: coenta_mrp_product_template
+#: model_terms:ir.ui.view,arch_db:coenta_mrp_product_template.mrp_product_template_form_view
+#: model_terms:ir.ui.view,arch_db:coenta_mrp_product_template.report_mrp_product_teplate_document
+msgid "Unit Quantity"
+msgstr "Birim Miktar"
+
+#. module: coenta_mrp_product_template
+#: model:ir.model.fields,field_description:coenta_mrp_product_template.field_mrp_product_template__message_unread
+msgid "Unread Messages"
+msgstr "Unread Messages"
+
+#. module: coenta_mrp_product_template
+#: model:ir.model.fields,field_description:coenta_mrp_product_template.field_mrp_product_template__message_unread_counter
+msgid "Unread Messages Counter"
+msgstr "Unread Messages Counter"
+
+#. module: coenta_mrp_product_template
+#: model:ir.model.fields.selection,name:coenta_mrp_product_template.selection__mrp_template_workorder__state__waiting
+msgid "Waiting"
+msgstr "Beklemede"
+
+#. module: coenta_mrp_product_template
+#: model:ir.model.fields,field_description:coenta_mrp_product_template.field_mrp_product_template__website_message_ids
+msgid "Website Messages"
+msgstr "Website Messages"
+
+#. module: coenta_mrp_product_template
+#: model:ir.model.fields,help:coenta_mrp_product_template.field_mrp_product_template__website_message_ids
+msgid "Website communication history"
+msgstr "Website communication history"
+
+#. module: coenta_mrp_product_template
+#: model:ir.model.fields,field_description:coenta_mrp_product_template.field_mrp_template_workorder__workcenter_id
+#: model_terms:ir.ui.view,arch_db:coenta_mrp_product_template.report_work_order_document
+msgid "Work Center"
+msgstr "İş/Üretim Merkezi"
+
+#. module: coenta_mrp_product_template
+#: model:ir.model,name:coenta_mrp_product_template.model_mrp_workorder
+#: model:ir.model.fields,field_description:coenta_mrp_product_template.field_mrp_template_workorder__operation_id
+#: model:ir.model.fields,field_description:coenta_mrp_product_template.field_mrp_template_workorder_note__workorder_id
+msgid "Work Order"
+msgstr "İş Emri"
+
+#. module: coenta_mrp_product_template
+#: model_terms:ir.ui.view,arch_db:coenta_mrp_product_template.mrp_product_template_form_view
+msgid "Work Order Instructions"
+msgstr "İş Emri Talimatları"
+
+#. module: coenta_mrp_product_template
+#: model:ir.actions.report,name:coenta_mrp_product_template.action_report_work_order
+msgid "Work Order Label"
+msgstr "İş Emri Etiketi"
+
+#. module: coenta_mrp_product_template
+#: model:ir.model.fields,field_description:coenta_mrp_product_template.field_mrp_template_workorder__workorder_note_ids
+msgid "Work Order Notes"
+msgstr "İş Emri Talimatları"
+
+#. module: coenta_mrp_product_template
+#: model:ir.model.fields,field_description:coenta_mrp_product_template.field_mrp_template_workorder__workorder_note_count
+msgid "Work Order Notes Count"
+msgstr "İş Emri Talimat Sayısı"
+
+#. module: coenta_mrp_product_template
+#: model:ir.model.fields,field_description:coenta_mrp_product_template.field_mrp_template_workorder__workorder_ids
+#: model:ir.model.fields,field_description:coenta_mrp_product_template.field_mrp_template_workorder_note__workorder_ids
+msgid "Work Orders"
+msgstr "İş Emirleri"
+
+#. module: coenta_mrp_product_template
+#: model:ir.model.fields,field_description:coenta_mrp_product_template.field_mrp_product_template__mrp_template_workorder_note_ids
+msgid "Workorder Notes"
+msgstr "İş Emri Talimatları"
+
+#. module: coenta_mrp_product_template
+#: model:ir.model.fields,field_description:coenta_mrp_product_template.field_mrp_workorder__workorder_specifaction
+msgid "Workorder Specifaction"
+msgstr "İş Emri Spesifikasyon"
+
+#. module: coenta_mrp_product_template
+#: model:ir.model.fields,field_description:coenta_mrp_product_template.field_mrp_product_template__workorder_template_ids
+#: model:ir.model.fields,field_description:coenta_mrp_product_template.field_mrp_workorder__workorder_template_id
+msgid "Workorder Template"
+msgstr "Model İş Emri"
+
+#. module: coenta_mrp_product_template
+#: model:ir.model.fields,field_description:coenta_mrp_product_template.field_mrp_product_template__workorder_template_status
+msgid "Workorder Template Status"
+msgstr "Model İş Emri Durumu"
+
+#. module: coenta_mrp_product_template
+#: model_terms:ir.ui.view,arch_db:coenta_mrp_product_template.mrp_product_template_form_view
+msgid "Workorders"
+msgstr "İş Emirleri"

@@ -28,7 +28,7 @@
                             <field name="sequence" widget="handle"/>
                             <field name="domain_product_template_ids" invisible="1"/>
                             <field name="product_template_id" domain="[('id','in',domain_product_template_ids)]"/>
-                            <!-- <field name="workcenter_id" /> -->
+                             <field name="workcenter_id" />
                             <field name="name" string="Production Notes"/>
                             <field name="image" widget="image" class="oe_avatar"/>
 

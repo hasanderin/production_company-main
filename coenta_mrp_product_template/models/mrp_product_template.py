@@ -137,6 +137,16 @@ class MrpProductTemplate(models.Model):
                 for move in production.move_raw_ids:
                     move.coenta_product_move_id = rec.mrp_product_template_move_ids.filtered(lambda l: l.product_id == move.product_id)[0].id
 
+        for line in rec.sale_id.sale_production_note_ids:
+            workorder = rec.workorder_template_ids.filtered(lambda l: l.operation_id.workcenter_id.id == line.workcenter_id.id)
+            if line.product_template_id.id == rec.product_tmpl_id.id and workorder:
+                self.env['mrp.template.workorder.note'].create({
+                    'mrp_template_id': rec.id,
+                    'workorder_id': workorder.id or False,
+                    'name': line.name,
+                    'image': line.image,
+                })
+
         rec.state= 'confirmed'
 
 

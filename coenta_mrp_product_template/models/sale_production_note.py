@@ -17,7 +17,7 @@ class SaleProductionNote(models.Model):
 
     product_template_id = fields.Many2one("product.template" , string="Product Template", required=True)
 
-    #workcenter_id = fields.Many2one("mrp.workcenter", string="Work Center", required=True)
+    workcenter_id = fields.Many2one("mrp.workcenter", string="Work Center", required=False)
 
     image = fields.Binary("Image")
 

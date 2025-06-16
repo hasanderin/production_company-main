@@ -25,9 +25,9 @@ class SaleOrder(models.Model):
         for record in self:
             templates = record.order_line.mapped('product_id').mapped('product_tmpl_id')
             for template in templates:
-                self.mrp_product_template_ids.create({
+                mrp_production_template_id = self.mrp_product_template_ids.create({
                     'product_tmpl_id': template.id,
-                    'sale_id': record.id,
+                    'sale_id': record.id
                 })
 
 

@@ -20,6 +20,16 @@
             file="acoenta_mrp_product_template.report_mrp_product_teplate"
             print_report_name=""
             />
+
+        <report
+            string="Üretim Notları"
+            id="action_sale_production_note"
+            model="sale.order"
+            report_type="qweb-pdf"
+            name="coenta_mrp_product_template.report_sale_production_note_template"
+            file="coenta_mrp_product_template.report_sale_production_note_template"
+            print_report_name="'Üretim Notları - %s' % (object.name)"
+            />
 	</data>
 
 

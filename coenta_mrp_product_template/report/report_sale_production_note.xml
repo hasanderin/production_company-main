@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <template id="report_sale_production_note_template_document">
+        <t t-call="web.external_layout">
+            <t t-set="o" t-value="doc.with_context()"/>
+            <div class="page">
+                <style>
+                    .table-bordered > thead > tr > th,
+                    .table-bordered > tbody > tr > th,
+                    .table-bordered > tfoot > tr > th,
+                    .table-bordered > thead > tr > td,
+                    .table-bordered > tbody > tr > td,
+                    .table-bordered > tfoot > tr > td {
+                    border: 1px solid #000000;
+                    }
+                </style>
+                <div class="row">
+                    <table class="table table-bordered">
+                        <tr>
+                            <td class="text-center">
+                                <span t-field="o.name"
+                                      style="font-weight:bold;font-size:32pt;text-transform: uppercase"/>
+                                <span style="font-weight:bold;font-size:32pt;text-transform: uppercase">
+                                    Üretim Notları</span>
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+                <div class="row mt8 mb8">
+                    <div class="col-12">
+                        <table class="table table-bordered">
+                            <tr>
+                                <th>
+                                    Model
+                                </th>
+                                <th>
+                                    Müşteri
+                                </th>
+                                <th>
+                                    Sipariş Numarası
+                                </th>
+                            </tr>
+                            <tr>
+                                <t t-set="product" t-value="o.order_line[0].product_id.product_tmpl_id"/>
+                                <td>
+                                    <span t-esc="product.name"/>
+                                </td>
+                                <td>
+                                    <span t-field="o.partner_id.name"/>
+                                </td>
+                                <td>
+                                    <span t-field="o.name"/>
+                                </td>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+
+                <div class="row mb16">
+                    <div class="col-12">
+                        <table class="table table-bordered">
+                            <thead>
+                            <tr>
+                                <th>
+                                    İş Merkezi
+                                </th>
+                                <th>
+                                    Üretim Notu
+                                </th>
+                                <th>
+                                    Resim
+                                </th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <t t-set="notes"
+                               t-value="o.sale_production_note_ids"/>
+                            <t t-foreach="notes" t-as="note">
+                                <tr>
+                                    <td>
+                                        <span t-field="note.workcenter_id.name"/>
+                                    </td>
+                                    <td style="width: 30%;">
+                                        <span t-field="note.name"/>
+
+                                    </td>
+                                    <td style="width: 50%;">
+                                        <img t-if="note.image" t-att-src="image_data_uri(note.image)"
+                                             style="max-width:9cm;" alt="Logo"/>
+                                    </td>
+                                </tr>
+                            </t>
+                            </tbody>
+                        </table>
+                    </div>
+
+                </div>
+            </div>
+        </t>
+    </template>
+
+    <template id="report_sale_production_note_template">
+        <t t-call="web.html_container">
+            <t t-foreach="docs" t-as="doc">
+                <t t-call="coenta_mrp_product_template.report_sale_production_note_template_document"/>
+            </t>
+        </t>
+    </template>
+</odoo>

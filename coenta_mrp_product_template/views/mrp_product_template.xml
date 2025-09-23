@@ -16,11 +16,11 @@
                     <button name="button_mark_done"
                             type="object"
                             string="Mark Done"
-                            class="oe_highlight" states="confirmed"/>
+                            class="oe_highlight" states="confirmed,in_progress"/>
                     <button name="button_cancel_productions"
                             type="object"
                             string="Cancel Productions"
-                            style="background-color:red;color:white" states="draft,confirmed"/>
+                            style="background-color:red;color:white" states="draft,confirmed,in_progress"/>
                     <field name="workorder_template_status" widget="badge"/>
                     <field name="state" widget="statusbar"
                            statusbar_visible="draft,confirmed,done,cancel"
@@ -171,6 +171,7 @@
                 <field name="done_qty" optional="show"/>
                 <field name="picking_type_id" optional="hide"/>
                 <field name="state" optional="show"/>
+                <field name="in_progress_workorder" optional="show" widget="badge"/>
 
             </tree>
         </field>

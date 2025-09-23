@@ -104,6 +104,8 @@ class MrpTemplateWorkorder(models.Model):
         for workorder in self.workorder_ids:
             workorder.button_start()
             self.state= 'in_progress'
+        if self.workorder_ids:
+            self.mrp_template_id.state = 'in_progress'
         return True
 
     def button_pending(self):

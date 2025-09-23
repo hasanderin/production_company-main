@@ -38,6 +38,18 @@ class MrpProductTemplate(models.Model):
 
     workorder_template_ids = fields.One2many('mrp.template.workorder', 'mrp_template_id', string='Workorder Template')
 
+    in_progress_workorder = fields.Char("Work In Progress",compute='_compute_in_progress_workorder')
+
+
+    def _compute_in_progress_workorder(self):
+        for rec in self:
+            rec.in_progress_workorder = ""
+            liste = rec.mapped('workorder_template_ids').filtered(
+                lambda l: l.state == 'in_progress')
+            if liste:
+                liste = liste.mapped('operation_id.name')
+                rec.in_progress_workorder = ','.join(liste)
+
     @api.onchange('product_tmpl_id')
     def _onchage_product_template_id(self):
         for rec in self:
@@ -73,6 +85,7 @@ class MrpProductTemplate(models.Model):
     state = fields.Selection([
         ('draft', 'Draft'),
         ('confirmed', 'Confirmed'),
+        ('in_progress', 'In Progress'),
         ('done', 'Done'),
         ('cancel', 'Cancelled'),
     ], string='Status', default='draft')

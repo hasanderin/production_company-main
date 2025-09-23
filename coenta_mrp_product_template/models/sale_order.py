@@ -10,6 +10,36 @@ class SaleOrder(models.Model):
 
     mrp_product_template_ids = fields.One2many('mrp.product.template','sale_id','Production Templates')
 
+    mrp_template_status =   fields.Selection([
+        ('no','Not Created'),
+        ('draft', 'Draft'),
+        ('in_progress', 'In Progress'),
+        ('confirmed', 'Confirmed'),
+        ('done', 'Done'),
+        ('cancel', 'Cancelled'),
+    ], string='Status', compute='_compute_mrp_template_status',store=True)
+
+    operation_for_mrp_template = fields.Char("Operation",compute='_compute_continue_operation')
+
+    def _compute_continue_operation(self):
+        for rec in self:
+            rec.operation_for_mrp_template=""
+            if rec.mrp_product_template_ids and rec.mrp_product_template_ids[0].state == 'in_progress':
+                liste = rec.mrp_product_template_ids.mapped('workorder_template_ids').filtered(lambda l:l.state =='in_progress').mapped('operation_id.name')
+                if liste:
+                    rec.operation_for_mrp_template = ','.join(liste)
+
+
+
+    @api.depends('mrp_product_template_ids','mrp_product_template_ids.state')
+    def _compute_mrp_template_status(self):
+        for rec in self:
+            if rec.mrp_product_template_ids:
+                rec.mrp_template_status = rec.mrp_product_template_ids[0].state
+            else:
+                rec.mrp_template_status = 'no'
+
+
     sale_production_note_ids = fields.One2many('sale.production.note', 'sale_id', string="Production Notes")
 
     domain_product_template_ids = fields.Many2many("product.template",compute='_compute_domain_product_template_ids', string="Domain Product Template")

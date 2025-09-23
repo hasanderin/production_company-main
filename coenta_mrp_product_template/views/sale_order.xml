@@ -48,10 +48,38 @@
             </xpath>
             <xpath expr="//label[@for='pricelist_id']" position="before">
                 <field name="commitment_date"/>
+                <field name="mrp_template_status" widget="badge"/>
+                <field name="operation_for_mrp_template"/>
             </xpath>
         </field>
     </record>
 
+
+    <record model="ir.ui.view" id="sale_order_tree_view">
+        <field name="model">sale.order</field>
+        <field name="inherit_id" ref="sale.view_order_tree"/>
+        <field name="arch" type="xml">
+            <xpath expr="//tree" position="inside">
+
+                <field name="mrp_product_template_ids" widget="many2many_tags"/>
+                <field name="mrp_template_status" widget="badge" optional="hide"/>
+                <field name="operation_for_mrp_template" widget="badge" optional="hide"/>
+            </xpath>
+        </field>
+    </record>
+
+
+    <record model="ir.ui.view" id="view_quotation_tree">
+        <field name="model">sale.order</field>
+        <field name="inherit_id" ref="sale.view_quotation_tree"/>
+        <field name="arch" type="xml">
+            <xpath expr="//tree" position="inside">
+                <field name="mrp_product_template_ids" widget="many2many_tags"/>
+                <field name="mrp_template_status" widget="badge" optional="hide"/>
+                <field name="operation_for_mrp_template" widget="badge" optional="hide"/>
+            </xpath>
+        </field>
+    </record>
 
 
 </odoo>

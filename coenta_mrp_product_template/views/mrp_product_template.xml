@@ -151,6 +151,8 @@
                 <filter name="state" string="State" context="{'group_by':'state'}"
                         />
                 <filter name="partner_id" string="Partner" context="{'group_by':'partner_id'}"/>
+
+                <filter name="in_progress_wo_ids" string="WIP" context="{'group_by':'in_progress_wo_ids'}"/>
                 <filter name="product_tmpl_id" string="Product" context="{'group_by':'product_tmpl_id'}"/>
                 <filter name="sale_id" string="Sale Order" context="{'group_by':'sale_id'}"/>
                 <filter name="commitment_date" string="Commitment Date" context="{'group_by':'commitment_date'}"/>
@@ -171,14 +173,14 @@
                 <field name="done_qty" optional="show"/>
                 <field name="picking_type_id" optional="hide"/>
                 <field name="state" optional="show"/>
-                <field name="in_progress_workorder" optional="show" widget="badge"/>
+                <field name="in_progress_wo_ids" optional="show" widget="many2many_tags"/>
 
             </tree>
         </field>
     </record>
 
     <record model="ir.actions.act_window" id="mrp_product_template_act_window">
-        <field name="name">Mrp Product Template</field> <!-- TODO -->
+        <field name="name">Mrp Product Template</field>
         <field name="res_model">mrp.product.template</field>
         <field name="view_mode">tree,form</field>
         <field name="domain">[]</field>
@@ -187,9 +189,9 @@
 
     <record model="ir.ui.menu" id="mrp_product_template_menu">
         <field name="name">Mrp Product Template</field>
-        <field name="parent_id" ref="mrp.menu_mrp_root"/> <!-- TODO -->
+        <field name="parent_id" ref="mrp.menu_mrp_root"/>
         <field name="action" ref="mrp_product_template_act_window"/>
-        <field name="sequence" eval="12"/> <!-- TODO -->
+        <field name="sequence" eval="12"/>
     </record>
 
 </odoo>

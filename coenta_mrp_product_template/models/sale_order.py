@@ -19,16 +19,17 @@ class SaleOrder(models.Model):
         ('cancel', 'Cancelled'),
     ], string='Status', compute='_compute_mrp_template_status',store=True)
 
-    operation_for_mrp_template = fields.Char("Operation",compute='_compute_continue_operation')
+    in_progress_workorder_ids = fields.Many2many(
+        "mrp.template.workorder",
+        string="Work In Progress",
+        compute='_compute_in_progress_workorder',store=True
+    )
 
-    def _compute_continue_operation(self):
+    @api.depends('mrp_product_template_ids','mrp_product_template_ids.state','mrp_product_template_ids.workorder_template_ids','mrp_product_template_ids.workorder_template_ids.state')
+    def _compute_in_progress_workorder(self):
         for rec in self:
-            rec.operation_for_mrp_template=""
-            if rec.mrp_product_template_ids and rec.mrp_product_template_ids[0].state == 'in_progress':
-                liste = rec.mrp_product_template_ids.mapped('workorder_template_ids').filtered(lambda l:l.state =='in_progress').mapped('operation_id.name')
-                if liste:
-                    rec.operation_for_mrp_template = ','.join(liste)
-
+            in_pr_wo_ids = rec.mapped('mrp_product_template_ids.workorder_template_ids').filtered(lambda l: l.state == 'in_progress')
+            rec.in_progress_workorder_ids = in_pr_wo_ids
 
 
     @api.depends('mrp_product_template_ids','mrp_product_template_ids.state')

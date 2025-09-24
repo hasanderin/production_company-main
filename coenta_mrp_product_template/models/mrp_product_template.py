@@ -38,17 +38,16 @@ class MrpProductTemplate(models.Model):
 
     workorder_template_ids = fields.One2many('mrp.template.workorder', 'mrp_template_id', string='Workorder Template')
 
-    in_progress_workorder = fields.Char("Work In Progress",compute='_compute_in_progress_workorder')
+    in_progress_wo_ids = fields.Many2many("mrp.template.workorder",
+                                         string="Work In Progress",
+                                         compute='_compute_in_progress_workorder',store=True
+                                         )
 
-
+    @api.depends('workorder_template_ids', 'workorder_template_ids.state')
     def _compute_in_progress_workorder(self):
         for rec in self:
-            rec.in_progress_workorder = ""
-            liste = rec.mapped('workorder_template_ids').filtered(
-                lambda l: l.state == 'in_progress')
-            if liste:
-                liste = liste.mapped('operation_id.name')
-                rec.in_progress_workorder = ','.join(liste)
+            in_pr_wo_ids = rec.workorder_template_ids.filtered(lambda l: l.state == 'in_progress')
+            rec.in_progress_wo_ids = in_pr_wo_ids
 
     @api.onchange('product_tmpl_id')
     def _onchage_product_template_id(self):

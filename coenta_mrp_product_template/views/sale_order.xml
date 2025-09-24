@@ -11,13 +11,13 @@
             <xpath expr="//header" position="inside">
                 <button name="create_mrp_product_template_ids" type="object"
                         class="oe_stat_button" icon="fa-cogs" string="Create MRP Product Template"
-                        attrs="{'invisible':[('mrp_product_template_ids','!=',[])]}"
+                        attrs="{'invisible':['|',('state','not in',['done','sale']),('mrp_product_template_ids','!=',[]),]}"
                         />
             </xpath>
             <xpath expr="//div[@name='button_box']" position="inside">
                 <button name="action_open_product_template" type="object"
                         class="oe_stat_button" icon="fa-cogs" string="MRP Product Template"
-
+                        attrs="{'invisible':[('state','not in',['done','sale'])]}"
                         />
             </xpath>
             <xpath expr="//notebook" position="inside">
@@ -49,7 +49,7 @@
             <xpath expr="//label[@for='pricelist_id']" position="before">
                 <field name="commitment_date"/>
                 <field name="mrp_template_status" widget="badge"/>
-                <field name="operation_for_mrp_template"/>
+                <field name="in_progress_workorder_ids" widget="many2many_tags"/>
             </xpath>
         </field>
     </record>
@@ -63,7 +63,7 @@
 
                 <field name="mrp_product_template_ids" widget="many2many_tags"/>
                 <field name="mrp_template_status" widget="badge" optional="hide"/>
-                <field name="operation_for_mrp_template" widget="badge" optional="hide"/>
+                <field name="in_progress_workorder_ids" widget="many2many_tags" optional="hide"/>
             </xpath>
         </field>
     </record>
@@ -76,7 +76,7 @@
             <xpath expr="//tree" position="inside">
                 <field name="mrp_product_template_ids" widget="many2many_tags"/>
                 <field name="mrp_template_status" widget="badge" optional="hide"/>
-                <field name="operation_for_mrp_template" widget="badge" optional="hide"/>
+                <field name="in_progress_workorder_ids" widget="many2many_tags" optional="hide"/>
             </xpath>
         </field>
     </record>

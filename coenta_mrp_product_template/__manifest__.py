@@ -6,9 +6,10 @@
     'license': 'AGPL-3',
     'author': 'Coenta Team',
     'website': 'coenta.com',
-    'depends': ['mrp','product','sale'
+    'depends': ['mrp','product','sale','sale_stock'
     ],
     'data': [
+        'views/stock_picking.xml',
         'security/mrp_template_workorder_note.xml',
         'security/sale_production_note.xml',
         'views/product_attribute.xml',

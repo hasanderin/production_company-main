@@ -3,7 +3,7 @@
     <record id="rule_mrp_product_template_active_company_only" model="ir.rule">
         <field name="name">MRP Product Template - Active company only</field>
         <field name="model_id" ref="model_mrp_product_template"/>
-        <field name="domain_force">[('company_id', '=', context.get('company_id'))]</field>
+        <field name="domain_force">[('company_id', 'in', allowed_company_ids)]</field>
         <field name="groups" eval="[(4, ref('base.group_user'))]"/>
     </record>
 </odoo>

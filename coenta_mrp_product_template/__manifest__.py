@@ -24,7 +24,8 @@
         'views/mrp_product_template.xml',
         'report/report.xml',
         'report/report_document.xml',
-        'report/report_sale_production_note.xml'
+        'report/report_sale_production_note.xml',
+        'security/mrp_product_template_rules.xml',
 
     ],
     'demo': [
